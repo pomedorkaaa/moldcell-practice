@@ -1,6 +1,6 @@
 <script setup>
 import styles from "./AppHeader.module.scss";
-const search = ref("123");
+const search = ref("");
 const cartCounter = ref(2);
 </script>
 
@@ -12,19 +12,21 @@ const cartCounter = ref(2);
         <span :class="styles['header-logo-pointer']">.</span>
       </NuxtLink>
       <NuxtLink to="/catalog" :class="styles['header-catalog']">
-        <img
+        <!-- <img
           src="/icons/catalog.svg"
           alt="catalog-icon"
           :class="styles['header-catalog-icon']"
-        />
+        /> -->
+        <Icon name="my-icon:catalog" :class="styles['header-catalog-icon']" />
         <span :class="styles['header-catalog-text']">Catalog</span>
       </NuxtLink>
       <div :class="styles['header-search']">
-        <img
+        <!-- <img
           src="/icons/search.svg"
           :class="styles['header-search-icon']"
           alt="search-icon"
-        />
+        /> -->
+        <Icon name="my-icon:search" :class="styles['header-search-icon']" />
         <input
           type="text"
           placeholder="Search products"
@@ -34,25 +36,28 @@ const cartCounter = ref(2);
       </div>
       <nav :class="styles['header-actions']">
         <NuxtLink to="/profile" :class="styles['header-action']">
-          <img
+          <!-- <img
             src="/icons/profile.svg"
             :class="styles['header-action-icon']"
             alt="profile icon"
-          />
+          /> -->
+          <Icon name="my-icon:profile" :class="styles['header-action-icon']" />
         </NuxtLink>
         <NuxtLink to="/favourites" :class="styles['header-action']">
-          <img
+          <!-- <img
             src="/icons/heart.svg"
             :class="styles['header-action-icon']"
             alt="heart icon"
-          />
+          /> -->
+          <Icon name="my-icon:heart" :class="styles['header-action-icon']" />
         </NuxtLink>
         <NuxtLink to="/cart" :class="styles['header-action']">
-          <img
+          <!-- <img
             src="/icons/cart.svg"
             :class="styles['header-action-icon']"
             alt="cart icon"
-          />
+          /> -->
+          <Icon name="my-icon:cart" :class="styles['header-action-icon']" />
           <span :class="styles['header-action-badge']">{{ cartCounter }}</span>
         </NuxtLink>
       </nav>
