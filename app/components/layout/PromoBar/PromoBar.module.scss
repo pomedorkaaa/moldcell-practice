@@ -1,0 +1,22 @@
+.promo-bar {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  min-height: 34px;
+  background-color: var(--color-text-primary);
+  color: var(--color-surface);
+
+  @media (max-width: 639) {
+    min-height: 30px;
+  }
+
+  &-text {
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+
+    @media (max-width: 639) {
+      font-size: 11px;
+    }
+  }
+}
