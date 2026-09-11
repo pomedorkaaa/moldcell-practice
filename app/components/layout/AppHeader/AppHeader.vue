@@ -1,7 +1,34 @@
 <script setup>
 import styles from "./AppHeader.module.scss";
-const search = ref("");
-const cartCounter = ref(2);
+const search = ref("12");
+const cartItemsCount = ref(1);
+const hasCartItems = computed(() => {
+  return cartItemsCount.value > 0;
+});
+
+watch(
+  search,
+  (value, oldValue) => {
+    console.log("search: ", { oldValue, value });
+  },
+  { immediate: true },
+);
+
+watch(
+  cartItemsCount,
+  (value, oldValue) => {
+    console.log("cart: ", { oldValue, value });
+  },
+  { immediate: true },
+);
+
+watch(
+  hasCartItems,
+  (value, oldValue) => {
+    console.log("has items in cart: ", { oldValue, value });
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -12,55 +39,48 @@ const cartCounter = ref(2);
         <span :class="styles['header-logo-pointer']">.</span>
       </NuxtLink>
       <NuxtLink to="/catalog" :class="styles['header-catalog']">
-        <!-- <img
-          src="/icons/catalog.svg"
-          alt="catalog-icon"
-          :class="styles['header-catalog-icon']"
-        /> -->
         <Icon name="my-icon:catalog" :class="styles['header-catalog-icon']" />
         <span :class="styles['header-catalog-text']">Catalog</span>
       </NuxtLink>
       <div :class="styles['header-search']">
-        <!-- <img
-          src="/icons/search.svg"
-          :class="styles['header-search-icon']"
-          alt="search-icon"
-        /> -->
-        <Icon name="my-icon:search" :class="styles['header-search-icon']" />
         <input
           type="text"
           placeholder="Search products"
           :class="styles['header-search-input']"
           v-model="search"
         />
+        <Icon name="my-icon:search" :class="styles['header-search-icon']" />
       </div>
-      <nav :class="styles['header-actions']">
-        <NuxtLink to="/profile" :class="styles['header-action']">
-          <!-- <img
-            src="/icons/profile.svg"
-            :class="styles['header-action-icon']"
-            alt="profile icon"
-          /> -->
-          <Icon name="my-icon:profile" :class="styles['header-action-icon']" />
+      <nav :class="styles['header-nav-actions']">
+        <NuxtLink to="/profile" :class="styles['header-nav-action']">
+          <Icon
+            name="my-icon:profile"
+            :class="styles['header-nav-action-icon']"
+          />
         </NuxtLink>
-        <NuxtLink to="/favourites" :class="styles['header-action']">
-          <!-- <img
-            src="/icons/heart.svg"
-            :class="styles['header-action-icon']"
-            alt="heart icon"
-          /> -->
-          <Icon name="my-icon:heart" :class="styles['header-action-icon']" />
+        <NuxtLink to="/favourites" :class="styles['header-nav-action']">
+          <Icon
+            name="my-icon:heart"
+            :class="styles['header-nav-action-icon']"
+          />
         </NuxtLink>
-        <NuxtLink to="/cart" :class="styles['header-action']">
-          <!-- <img
-            src="/icons/cart.svg"
-            :class="styles['header-action-icon']"
-            alt="cart icon"
-          /> -->
-          <Icon name="my-icon:cart" :class="styles['header-action-icon']" />
-          <span :class="styles['header-action-badge']">{{ cartCounter }}</span>
+        <NuxtLink to="/cart" :class="styles['header-nav-action']">
+          <Icon name="my-icon:cart" :class="styles['header-nav-action-icon']" />
+          <span
+            v-if="hasCartItems"
+            :class="styles['header-nav-action-badge']"
+            >{{ cartItemsCount }}</span
+          >
         </NuxtLink>
       </nav>
+    </div>
+    <div>
+      Корзина:
+      <button @click="cartItemsCount++">Добавить</button>
+      <button @click="cartItemsCount = Math.max(cartItemsCount - 1, 0)">
+        Удалить
+      </button>
+      <button @click="cartItemsCount = 0">Сбросить</button>
     </div>
   </header>
 </template>

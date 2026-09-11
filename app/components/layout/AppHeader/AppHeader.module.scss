@@ -10,6 +10,10 @@
     align-items: center;
     padding-block: 17px;
     gap: 16px;
+    flex-wrap: wrap;
+    @media (max-width: 639px) {
+      gap: 10px;
+    }
   }
 
   &-logo {
@@ -19,6 +23,7 @@
     @media (max-width: 639px) {
       font-size: 31px;
       line-height: 31px;
+      flex-grow: 1;
     }
     &-pointer {
       margin-left: 4px;
@@ -40,7 +45,12 @@
     &-text {
       font-weight: bold;
       font-size: 14px;
-      @media (max-width: 639px) {
+    }
+
+    @media (max-width: 639px) {
+      padding: 10px;
+
+      &-text {
         display: none;
       }
     }
@@ -59,20 +69,38 @@
       font-size: 14px;
       font-weight: bold;
       width: 100%;
+      transition: all 0.2s ease-out;
+      min-width: 0;
+
+      &:focus-visible {
+        box-shadow: 0 0 0 4px rgba(36, 92, 255, 0.1);
+        border: 1px solid #aebfff;
+        outline: none;
+        color: var(--color-accent);
+      }
+    }
+
+    &-input:focus-visible ~ &-icon {
+      color: var(--color-accent);
     }
 
     &-icon {
       position: absolute;
       top: 14px;
       left: 16px;
-      color: var(--color-accent);
+      color: var(--color-text-secondary);
+      // color: var(--color-accent);
+    }
+
+    @media (max-width: 639px) {
+      order: 4;
     }
   }
 
-  &-actions {
+  &-nav-actions {
     display: flex;
     gap: 8px;
-    & .header-action {
+    & .header-nav-action {
       display: flex;
       position: relative;
       padding: 10px;

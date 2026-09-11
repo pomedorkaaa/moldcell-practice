@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     customCollections: [
       {
         prefix: "my-icon",
-        dir: "@/assets/icons",
+        // `dir` is resolved as a filesystem path by @nuxt/icon, not as a Nuxt alias.
+        dir: "./app/assets/icons",
       },
     ],
   },

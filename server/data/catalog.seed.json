@@ -1,0 +1,659 @@
+{
+  "brands": [
+    {
+      "id": 1,
+      "name": "Logitech",
+      "slug": "logitech"
+    },
+    {
+      "id": 2,
+      "name": "Keychron",
+      "slug": "keychron"
+    },
+    {
+      "id": 3,
+      "name": "BenQ",
+      "slug": "benq"
+    },
+    {
+      "id": 4,
+      "name": "NuPhy",
+      "slug": "nuphy"
+    },
+    {
+      "id": 5,
+      "name": "HyperX",
+      "slug": "hyperx"
+    },
+    {
+      "id": 6,
+      "name": "Xiaomi",
+      "slug": "xiaomi"
+    },
+    {
+      "id": 7,
+      "name": "Steelcase",
+      "slug": "steelcase"
+    },
+    {
+      "id": 8,
+      "name": "Sony",
+      "slug": "sony"
+    },
+    {
+      "id": 9,
+      "name": "Razer",
+      "slug": "razer"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Keyboards",
+      "slug": "keyboards"
+    },
+    {
+      "id": 2,
+      "name": "Mice",
+      "slug": "mice"
+    },
+    {
+      "id": 3,
+      "name": "Lighting",
+      "slug": "lighting"
+    },
+    {
+      "id": 4,
+      "name": "Audio",
+      "slug": "audio"
+    },
+    {
+      "id": 5,
+      "name": "Chairs",
+      "slug": "chairs"
+    },
+    {
+      "id": 6,
+      "name": "Accessories",
+      "slug": "accessories"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Keychron K8 Pro Wireless",
+      "slug": "keychron-k8-pro",
+      "brandId": 2,
+      "categoryId": 1,
+      "price": 119,
+      "oldPrice": 139,
+      "stock": 0,
+      "description": "Keychron K8 Pro Wireless is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/keychron-k8-pro-1.webp",
+        "/images/products/keychron-k8-pro-2.webp"
+      ],
+      "createdAt": "2026-01-04T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Keychron Q1 V2",
+      "slug": "keychron-q1-v2",
+      "brandId": 2,
+      "categoryId": 1,
+      "price": 179,
+      "oldPrice": 199,
+      "stock": 7,
+      "description": "Keychron Q1 V2 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/keychron-q1-v2-1.webp",
+        "/images/products/keychron-q1-v2-2.webp"
+      ],
+      "createdAt": "2026-02-07T10:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Keychron V1 Max",
+      "slug": "keychron-v1-max",
+      "brandId": 2,
+      "categoryId": 1,
+      "price": 109,
+      "oldPrice": null,
+      "stock": 3,
+      "description": "Keychron V1 Max is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/keychron-v1-max-1.webp",
+        "/images/products/keychron-v1-max-2.webp"
+      ],
+      "createdAt": "2026-03-10T10:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "NuPhy Air75 V2",
+      "slug": "nuphy-air75-v2",
+      "brandId": 4,
+      "categoryId": 1,
+      "price": 129,
+      "oldPrice": null,
+      "stock": 0,
+      "description": "NuPhy Air75 V2 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/nuphy-air75-v2-1.webp",
+        "/images/products/nuphy-air75-v2-2.webp"
+      ],
+      "createdAt": "2026-04-13T10:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "NuPhy Halo75 V2",
+      "slug": "nuphy-halo75-v2",
+      "brandId": 4,
+      "categoryId": 1,
+      "price": 149,
+      "oldPrice": 169,
+      "stock": 7,
+      "description": "NuPhy Halo75 V2 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/nuphy-halo75-v2-1.webp",
+        "/images/products/nuphy-halo75-v2-2.webp"
+      ],
+      "createdAt": "2026-05-16T10:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "name": "Logitech MX Mechanical Mini",
+      "slug": "logitech-mx-mechanical-mini",
+      "brandId": 1,
+      "categoryId": 1,
+      "price": 139,
+      "oldPrice": 159,
+      "stock": 28,
+      "description": "Logitech MX Mechanical Mini is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-mx-mechanical-mini-1.webp",
+        "/images/products/logitech-mx-mechanical-mini-2.webp"
+      ],
+      "createdAt": "2026-06-19T10:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "name": "Logitech Pebble Keys 2 K380s",
+      "slug": "logitech-pebble-keys-2-k380s",
+      "brandId": 1,
+      "categoryId": 1,
+      "price": 49,
+      "oldPrice": 59,
+      "stock": 7,
+      "description": "Logitech Pebble Keys 2 K380s is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-pebble-keys-2-k380s-1.webp",
+        "/images/products/logitech-pebble-keys-2-k380s-2.webp"
+      ],
+      "createdAt": "2026-07-22T10:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "name": "Razer BlackWidow V4 75%",
+      "slug": "razer-blackwidow-v4-75",
+      "brandId": 9,
+      "categoryId": 1,
+      "price": 189,
+      "oldPrice": 219,
+      "stock": 0,
+      "description": "Razer BlackWidow V4 75% is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/razer-blackwidow-v4-75-1.webp",
+        "/images/products/razer-blackwidow-v4-75-2.webp"
+      ],
+      "createdAt": "2026-08-25T10:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "name": "Logitech MX Master 3S",
+      "slug": "logitech-mx-master-3s",
+      "brandId": 1,
+      "categoryId": 2,
+      "price": 99,
+      "oldPrice": null,
+      "stock": 12,
+      "description": "Logitech MX Master 3S is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-mx-master-3s-1.webp",
+        "/images/products/logitech-mx-master-3s-2.webp"
+      ],
+      "createdAt": "2026-01-01T10:00:00.000Z"
+    },
+    {
+      "id": 10,
+      "name": "Logitech Lift Vertical",
+      "slug": "logitech-lift-vertical",
+      "brandId": 1,
+      "categoryId": 2,
+      "price": 69,
+      "oldPrice": 79,
+      "stock": 7,
+      "description": "Logitech Lift Vertical is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-lift-vertical-1.webp",
+        "/images/products/logitech-lift-vertical-2.webp"
+      ],
+      "createdAt": "2026-02-04T10:00:00.000Z"
+    },
+    {
+      "id": 11,
+      "name": "Logitech MX Anywhere 3S",
+      "slug": "logitech-mx-anywhere-3s",
+      "brandId": 1,
+      "categoryId": 2,
+      "price": 79,
+      "oldPrice": null,
+      "stock": 3,
+      "description": "Logitech MX Anywhere 3S is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-mx-anywhere-3s-1.webp",
+        "/images/products/logitech-mx-anywhere-3s-2.webp"
+      ],
+      "createdAt": "2026-03-07T10:00:00.000Z"
+    },
+    {
+      "id": 12,
+      "name": "Logitech G502 X",
+      "slug": "logitech-g502-x",
+      "brandId": 1,
+      "categoryId": 2,
+      "price": 89,
+      "oldPrice": 99,
+      "stock": 12,
+      "description": "Logitech G502 X is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-g502-x-1.webp",
+        "/images/products/logitech-g502-x-2.webp"
+      ],
+      "createdAt": "2026-04-10T10:00:00.000Z"
+    },
+    {
+      "id": 13,
+      "name": "Razer DeathAdder V3 Pro",
+      "slug": "razer-deathadder-v3-pro",
+      "brandId": 9,
+      "categoryId": 2,
+      "price": 129,
+      "oldPrice": 149,
+      "stock": 0,
+      "description": "Razer DeathAdder V3 Pro is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/razer-deathadder-v3-pro-1.webp",
+        "/images/products/razer-deathadder-v3-pro-2.webp"
+      ],
+      "createdAt": "2026-05-13T10:00:00.000Z"
+    },
+    {
+      "id": 14,
+      "name": "Razer Basilisk V3",
+      "slug": "razer-basilisk-v3",
+      "brandId": 9,
+      "categoryId": 2,
+      "price": 69,
+      "oldPrice": null,
+      "stock": 16,
+      "description": "Razer Basilisk V3 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/razer-basilisk-v3-1.webp",
+        "/images/products/razer-basilisk-v3-2.webp"
+      ],
+      "createdAt": "2026-06-16T10:00:00.000Z"
+    },
+    {
+      "id": 15,
+      "name": "BenQ ScreenBar Halo",
+      "slug": "benq-screenbar-halo",
+      "brandId": 3,
+      "categoryId": 3,
+      "price": 169,
+      "oldPrice": null,
+      "stock": 34,
+      "description": "BenQ ScreenBar Halo is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/benq-screenbar-halo-1.webp",
+        "/images/products/benq-screenbar-halo-2.webp"
+      ],
+      "createdAt": "2026-07-19T10:00:00.000Z"
+    },
+    {
+      "id": 16,
+      "name": "BenQ ScreenBar Pro",
+      "slug": "benq-screenbar-pro",
+      "brandId": 3,
+      "categoryId": 3,
+      "price": 139,
+      "oldPrice": 149,
+      "stock": 3,
+      "description": "BenQ ScreenBar Pro is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/benq-screenbar-pro-1.webp",
+        "/images/products/benq-screenbar-pro-2.webp"
+      ],
+      "createdAt": "2026-08-22T10:00:00.000Z"
+    },
+    {
+      "id": 17,
+      "name": "Xiaomi Monitor Light Bar",
+      "slug": "xiaomi-monitor-light-bar",
+      "brandId": 6,
+      "categoryId": 3,
+      "price": 55,
+      "oldPrice": null,
+      "stock": 9,
+      "description": "Xiaomi Monitor Light Bar is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/xiaomi-monitor-light-bar-1.webp",
+        "/images/products/xiaomi-monitor-light-bar-2.webp"
+      ],
+      "createdAt": "2026-01-25T10:00:00.000Z"
+    },
+    {
+      "id": 18,
+      "name": "Xiaomi Desk Lamp 2",
+      "slug": "xiaomi-desk-lamp-2",
+      "brandId": 6,
+      "categoryId": 3,
+      "price": 49,
+      "oldPrice": 59,
+      "stock": 3,
+      "description": "Xiaomi Desk Lamp 2 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/xiaomi-desk-lamp-2-1.webp",
+        "/images/products/xiaomi-desk-lamp-2-2.webp"
+      ],
+      "createdAt": "2026-02-01T10:00:00.000Z"
+    },
+    {
+      "id": 19,
+      "name": "BenQ WiT Desk Lamp",
+      "slug": "benq-wit-desk-lamp",
+      "brandId": 3,
+      "categoryId": 3,
+      "price": 229,
+      "oldPrice": 249,
+      "stock": 21,
+      "description": "BenQ WiT Desk Lamp is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/benq-wit-desk-lamp-1.webp",
+        "/images/products/benq-wit-desk-lamp-2.webp"
+      ],
+      "createdAt": "2026-03-04T10:00:00.000Z"
+    },
+    {
+      "id": 20,
+      "name": "Sony WH-1000XM5",
+      "slug": "sony-wh-1000xm5",
+      "brandId": 8,
+      "categoryId": 4,
+      "price": 299,
+      "oldPrice": 349,
+      "stock": 12,
+      "description": "Sony WH-1000XM5 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/sony-wh-1000xm5-1.webp",
+        "/images/products/sony-wh-1000xm5-2.webp"
+      ],
+      "createdAt": "2026-04-07T10:00:00.000Z"
+    },
+    {
+      "id": 21,
+      "name": "Sony WH-CH720N",
+      "slug": "sony-wh-ch720n",
+      "brandId": 8,
+      "categoryId": 4,
+      "price": 99,
+      "oldPrice": 119,
+      "stock": 9,
+      "description": "Sony WH-CH720N is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/sony-wh-ch720n-1.webp",
+        "/images/products/sony-wh-ch720n-2.webp"
+      ],
+      "createdAt": "2026-05-10T10:00:00.000Z"
+    },
+    {
+      "id": 22,
+      "name": "HyperX Cloud III Wireless",
+      "slug": "hyperx-cloud-iii-wireless",
+      "brandId": 5,
+      "categoryId": 4,
+      "price": 129,
+      "oldPrice": 149,
+      "stock": 28,
+      "description": "HyperX Cloud III Wireless is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/hyperx-cloud-iii-wireless-1.webp",
+        "/images/products/hyperx-cloud-iii-wireless-2.webp"
+      ],
+      "createdAt": "2026-06-13T10:00:00.000Z"
+    },
+    {
+      "id": 23,
+      "name": "HyperX Cloud Alpha Wireless",
+      "slug": "hyperx-cloud-alpha-wireless",
+      "brandId": 5,
+      "categoryId": 4,
+      "price": 159,
+      "oldPrice": 179,
+      "stock": 21,
+      "description": "HyperX Cloud Alpha Wireless is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/hyperx-cloud-alpha-wireless-1.webp",
+        "/images/products/hyperx-cloud-alpha-wireless-2.webp"
+      ],
+      "createdAt": "2026-07-16T10:00:00.000Z"
+    },
+    {
+      "id": 24,
+      "name": "HyperX SoloCast",
+      "slug": "hyperx-solocast",
+      "brandId": 5,
+      "categoryId": 4,
+      "price": 59,
+      "oldPrice": null,
+      "stock": 28,
+      "description": "HyperX SoloCast is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/hyperx-solocast-1.webp",
+        "/images/products/hyperx-solocast-2.webp"
+      ],
+      "createdAt": "2026-08-19T10:00:00.000Z"
+    },
+    {
+      "id": 25,
+      "name": "Razer BlackShark V2 Pro",
+      "slug": "razer-blackshark-v2-pro",
+      "brandId": 9,
+      "categoryId": 4,
+      "price": 179,
+      "oldPrice": 199,
+      "stock": 0,
+      "description": "Razer BlackShark V2 Pro is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/razer-blackshark-v2-pro-1.webp",
+        "/images/products/razer-blackshark-v2-pro-2.webp"
+      ],
+      "createdAt": "2026-01-22T10:00:00.000Z"
+    },
+    {
+      "id": 26,
+      "name": "Steelcase Series 1",
+      "slug": "steelcase-series-1",
+      "brandId": 7,
+      "categoryId": 5,
+      "price": 449,
+      "oldPrice": null,
+      "stock": 12,
+      "description": "Steelcase Series 1 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/steelcase-series-1-1.webp",
+        "/images/products/steelcase-series-1-2.webp"
+      ],
+      "createdAt": "2026-02-25T10:00:00.000Z"
+    },
+    {
+      "id": 27,
+      "name": "Steelcase Series 2",
+      "slug": "steelcase-series-2",
+      "brandId": 7,
+      "categoryId": 5,
+      "price": 629,
+      "oldPrice": 699,
+      "stock": 3,
+      "description": "Steelcase Series 2 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/steelcase-series-2-1.webp",
+        "/images/products/steelcase-series-2-2.webp"
+      ],
+      "createdAt": "2026-03-01T10:00:00.000Z"
+    },
+    {
+      "id": 28,
+      "name": "Steelcase Gesture",
+      "slug": "steelcase-gesture",
+      "brandId": 7,
+      "categoryId": 5,
+      "price": 1099,
+      "oldPrice": null,
+      "stock": 7,
+      "description": "Steelcase Gesture is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/steelcase-gesture-1.webp",
+        "/images/products/steelcase-gesture-2.webp"
+      ],
+      "createdAt": "2026-04-04T10:00:00.000Z"
+    },
+    {
+      "id": 29,
+      "name": "Steelcase Think",
+      "slug": "steelcase-think",
+      "brandId": 7,
+      "categoryId": 5,
+      "price": 799,
+      "oldPrice": 849,
+      "stock": 21,
+      "description": "Steelcase Think is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/steelcase-think-1.webp",
+        "/images/products/steelcase-think-2.webp"
+      ],
+      "createdAt": "2026-05-07T10:00:00.000Z"
+    },
+    {
+      "id": 30,
+      "name": "Steelcase Amia",
+      "slug": "steelcase-amia",
+      "brandId": 7,
+      "categoryId": 5,
+      "price": 749,
+      "oldPrice": null,
+      "stock": 5,
+      "description": "Steelcase Amia is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/steelcase-amia-1.webp",
+        "/images/products/steelcase-amia-2.webp"
+      ],
+      "createdAt": "2026-06-10T10:00:00.000Z"
+    },
+    {
+      "id": 31,
+      "name": "Logitech Brio 500",
+      "slug": "logitech-brio-500",
+      "brandId": 1,
+      "categoryId": 6,
+      "price": 109,
+      "oldPrice": 129,
+      "stock": 34,
+      "description": "Logitech Brio 500 is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-brio-500-1.webp",
+        "/images/products/logitech-brio-500-2.webp"
+      ],
+      "createdAt": "2026-07-13T10:00:00.000Z"
+    },
+    {
+      "id": 32,
+      "name": "Logitech Casa Pop-Up Desk",
+      "slug": "logitech-casa-pop-up-desk",
+      "brandId": 1,
+      "categoryId": 6,
+      "price": 179,
+      "oldPrice": 199,
+      "stock": 12,
+      "description": "Logitech Casa Pop-Up Desk is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/logitech-casa-pop-up-desk-1.webp",
+        "/images/products/logitech-casa-pop-up-desk-2.webp"
+      ],
+      "createdAt": "2026-08-16T10:00:00.000Z"
+    },
+    {
+      "id": 33,
+      "name": "Xiaomi Mi Smart Clock",
+      "slug": "xiaomi-mi-smart-clock",
+      "brandId": 6,
+      "categoryId": 6,
+      "price": 49,
+      "oldPrice": null,
+      "stock": 28,
+      "description": "Xiaomi Mi Smart Clock is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/xiaomi-mi-smart-clock-1.webp",
+        "/images/products/xiaomi-mi-smart-clock-2.webp"
+      ],
+      "createdAt": "2026-01-19T10:00:00.000Z"
+    },
+    {
+      "id": 34,
+      "name": "Razer Base Station V2 Chroma",
+      "slug": "razer-base-station-v2-chroma",
+      "brandId": 9,
+      "categoryId": 6,
+      "price": 79,
+      "oldPrice": 89,
+      "stock": 0,
+      "description": "Razer Base Station V2 Chroma is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/razer-base-station-v2-chroma-1.webp",
+        "/images/products/razer-base-station-v2-chroma-2.webp"
+      ],
+      "createdAt": "2026-02-22T10:00:00.000Z"
+    },
+    {
+      "id": 35,
+      "name": "HyperX Pulsefire Mat XL",
+      "slug": "hyperx-pulsefire-mat-xl",
+      "brandId": 5,
+      "categoryId": 6,
+      "price": 39,
+      "oldPrice": null,
+      "stock": 5,
+      "description": "HyperX Pulsefire Mat XL is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/hyperx-pulsefire-mat-xl-1.webp",
+        "/images/products/hyperx-pulsefire-mat-xl-2.webp"
+      ],
+      "createdAt": "2026-03-25T10:00:00.000Z"
+    },
+    {
+      "id": 36,
+      "name": "Keychron Wooden Palm Rest",
+      "slug": "keychron-wooden-palm-rest",
+      "brandId": 2,
+      "categoryId": 6,
+      "price": 29,
+      "oldPrice": null,
+      "stock": 16,
+      "description": "Keychron Wooden Palm Rest is part of the Flux curated workspace collection. It is intended for a practical learning catalog with filtering, sorting, SSR product pages, cart and favorites.",
+      "images": [
+        "/images/products/keychron-wooden-palm-rest-1.webp",
+        "/images/products/keychron-wooden-palm-rest-2.webp"
+      ],
+      "createdAt": "2026-04-01T10:00:00.000Z"
+    }
+  ]
+}
