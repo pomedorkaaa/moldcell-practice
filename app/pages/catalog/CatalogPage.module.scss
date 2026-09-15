@@ -1,0 +1,25 @@
+.catalog-page,
+.favorites-page {
+  min-height: 520px;
+}
+
+.page-intro {
+  margin-bottom: 28px;
+
+  h1 {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  p {
+    max-width: 520px;
+    margin: 10px 0 0;
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
