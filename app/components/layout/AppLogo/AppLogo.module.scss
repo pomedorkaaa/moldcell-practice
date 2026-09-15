@@ -1,0 +1,26 @@
+.app-logo {
+  font-size: 36px;
+  line-height: 36px;
+  font-weight: 700;
+  @media (max-width: 639px) {
+    font-size: 31px;
+    line-height: 31px;
+    flex-grow: 1;
+  }
+
+  &-title {
+    color: var(--color-text-primary);
+
+    footer & {
+      color: var(--color-surface);
+    }
+  }
+
+  &-pointer {
+    margin-left: 4px;
+    color: var(--color-accent);
+    @media (max-width: 639px) {
+      margin-left: 2px;
+    }
+  }
+}

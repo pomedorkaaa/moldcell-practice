@@ -47,27 +47,46 @@ const isInStock = computed(() => {
         <Icon name="my-icon:heart" />
       </button>
     </div>
-    <!-- категория -->
-    <p :class="styles['product-card-category']">{{ product.category }}</p>
+    <!-- бренд/категория -->
+    <p :class="styles['product-card-catalog']">
+      {{ product.brand?.name }}/{{ product.category?.name }}
+      <!-- в стоке -->
+      <span
+        :class="[
+          styles['product-card-stock'],
+          !isInStock ? [styles['product-card-stock--empty']] : '',
+        ]"
+        ><Icon name="fluent-mdl2:location-dot" />{{
+          isInStock ? "In stock" : "Out"
+        }}</span
+      >
+    </p>
     <!-- название -->
-    <NuxtLink :to="`/products/${product.slug}`">{{ product.name }}</NuxtLink>
-    <!-- в стоке -->
-    <span
-      :class="[
-        styles['product-card-stock'],
-        !isInStock ? [styles['product-card-stock--empty']] : '',
-      ]"
-      >{{ isInStock ? "In stock" : "Out of Stock" }}</span
+    <NuxtLink
+      :to="`/products/${product.slug}`"
+      :class="styles['product-card-name']"
     >
-    <div>
-      <!-- цены -->
+      {{ product.name }}
+    </NuxtLink>
+
+    <!-- цены -->
+    <div :class="styles['product-card-prices']">
       <!-- новая -->
-      <span>{{ product.price }}</span>
+      <span :class="styles['product-card-prices-current']">
+        ${{ product.price }}
+      </span>
       <!-- старая -->
-      <span>{{ product.oldPrice }}</span>
+      <span v-if="discountPercent" :class="styles['product-card-prices-old']">
+        ${{ product.oldPrice }}
+      </span>
     </div>
     <!-- добавить в корзину -->
-    <button type="button" @click="emit('add-to-cart')" :disabled="!isInStock">
+    <button
+      type="button"
+      @click="emit('add-to-cart')"
+      :class="styles['product-card-button']"
+      :disabled="!isInStock"
+    >
       {{ isInStock ? "Add To Cart" : "Out of stock" }}
     </button>
   </div>

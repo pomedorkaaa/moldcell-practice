@@ -4,6 +4,9 @@
 }
 
 .header {
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+
   &-inner {
     display: flex;
     justify-content: space-between;
@@ -13,46 +16,6 @@
     flex-wrap: wrap;
     @media (max-width: 639px) {
       gap: 10px;
-    }
-  }
-
-  &-logo {
-    font-size: 36px;
-    line-height: 36px;
-    font-weight: 700;
-    @media (max-width: 639px) {
-      font-size: 31px;
-      line-height: 31px;
-      flex-grow: 1;
-    }
-    &-pointer {
-      margin-left: 4px;
-      color: var(--color-accent);
-      @media (max-width: 639px) {
-        margin-left: 2px;
-      }
-    }
-  }
-
-  &-catalog {
-    display: flex;
-    gap: 9px;
-    max-height: 46px;
-    @include header-action-border();
-    box-shadow: 0 8px 24px 0 rgba(36, 92, 255, 0.06);
-    padding: 12px;
-
-    &-text {
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    @media (max-width: 639px) {
-      padding: 10px;
-
-      &-text {
-        display: none;
-      }
     }
   }
 

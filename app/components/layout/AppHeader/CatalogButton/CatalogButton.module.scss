@@ -1,0 +1,32 @@
+.button-catalog {
+  display: flex;
+  gap: 9px;
+  max-height: 46px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 24px 0 rgba(36, 92, 255, 0.06);
+  padding: 12px;
+  transition: all 0.2s ease-out;
+
+  &--onCatalog {
+    border: 1px solid #aebfff;
+    color: var(--color-accent);
+
+    &-icon {
+      color: var(--color-accent);
+    }
+  }
+
+  &-text {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  @media (max-width: 639px) {
+    padding: 10px;
+
+    &-text {
+      display: none;
+    }
+  }
+}

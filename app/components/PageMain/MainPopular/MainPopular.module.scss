@@ -1,8 +1,14 @@
 .main-popular {
+  margin-bottom: 72px;
+
   &-products {
     margin-top: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
+
+    @media (max-width: 720px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }

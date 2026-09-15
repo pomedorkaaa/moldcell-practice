@@ -1,0 +1,18 @@
+.breadcrumbs {
+  display: flex;
+  //   gap: 8px;
+  text-transform: capitalize;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+  margin-block: 34px 20px;
+
+  &-item:not(:first-child)::before {
+    color: red;
+    font-size: 12px;
+    content: "/";
+    margin-inline: 8px;
+    color: var(--color-text-secondary);
+  }
+}
