@@ -6,15 +6,29 @@ import styles from "./AppFooter.module.scss";
 const footerSections = [
   {
     heading: "Shop",
-    links: ["All products", "Keyboards", "Mice", "Audio"],
+    links: [
+      { label: "All products", to: "/catalog" },
+      { label: "Keyboards", to: "/catalog" },
+      { label: "Mice", to: "/catalog" },
+      { label: "Audio", to: "/catalog" },
+    ],
   },
   {
     heading: "Help",
-    links: ["Delivery", "Returns", "Contact"],
+    links: [
+      { label: "Delivery", to: "/checkout" },
+      { label: "Returns", to: "/" },
+      { label: "Contact", to: "/" },
+    ],
   },
   {
     heading: "Account",
-    links: ["Profile", "Favorites", "Cart", "Checkout"],
+    links: [
+      { label: "Profile", to: "/profile" },
+      { label: "Favorites", to: "/favorites" },
+      { label: "Cart", to: "/cart" },
+      { label: "Checkout", to: "/checkout" },
+    ],
   },
 ];
 </script>
@@ -37,8 +51,8 @@ const footerSections = [
           <h6 :class="styles['footer-inner-links-section-heading']">
             {{ section.heading }}
           </h6>
-          <NuxtLink to="/" v-for="link in section.links">
-            {{ link }}
+          <NuxtLink :to="link.to" v-for="link in section.links">
+            {{ link.label }}
           </NuxtLink>
         </div>
         <!-- </div> -->
