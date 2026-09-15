@@ -6,6 +6,7 @@ import CatalogButton from "./CatalogButton/CatalogButton.vue";
 import SearchResults from "../SearchResults/SearchResults.vue";
 
 const search = ref("");
+const isSearchFocused = ref(false);
 const cartItemsCount = ref(0);
 const hasCartItems = computed(() => {
   return cartItemsCount.value > 0;
@@ -13,7 +14,15 @@ const hasCartItems = computed(() => {
 
 const route = useRoute();
 const isCatalogPage = computed(() => route.path === "/catalog");
-const isSearchOpen = computed(() => search.value.trim().length > 0);
+const isSearchOpen = computed(
+  () => isSearchFocused.value && search.value.trim().length > 0,
+);
+
+const handleSearchFocusOut = () => {
+  window.setTimeout(() => {
+    isSearchFocused.value = false;
+  }, 0);
+};
 </script>
 
 <template>
@@ -29,6 +38,8 @@ const isSearchOpen = computed(() => search.value.trim().length > 0);
             :class="styles['header-search-input']"
             v-model="search"
             aria-label="Search products"
+            @focus="isSearchFocused = true"
+            @blur="handleSearchFocusOut"
           />
           <Icon
             name="my-icon:search"
