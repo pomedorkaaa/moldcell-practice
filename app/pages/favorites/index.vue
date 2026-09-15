@@ -8,9 +8,9 @@ const favoriteProducts = mockCatalogProducts;
 
 <template>
   <section :class="styles['favorites-page']">
-    <div :class="styles['page-intro']">
+    <div :class="styles['catalog-heading']">
       <h1>Favorites</h1>
-      <p>Your saved workspace essentials, ready when you are.</p>
+      <p>3 products</p>
     </div>
     <CatalogGrid :products="favoriteProducts" />
   </section>

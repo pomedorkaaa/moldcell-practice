@@ -6,7 +6,7 @@ import CatalogButton from "./CatalogButton/CatalogButton.vue";
 import SearchResults from "../SearchResults/SearchResults.vue";
 
 const search = ref("");
-const cartItemsCount = ref(1);
+const cartItemsCount = ref(0);
 const hasCartItems = computed(() => {
   return cartItemsCount.value > 0;
 });

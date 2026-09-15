@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CatalogFilters from "~/components/catalog/CatalogFilters/CatalogFilters.vue";
 import CatalogGrid from "~/components/catalog/CatalogGrid/CatalogGrid.vue";
 import CatalogToolbar from "~/components/catalog/CatalogToolbar/CatalogToolbar.vue";
 import styles from "./CatalogPage.module.scss";
@@ -9,11 +10,18 @@ const catalogProducts = mockCatalogProducts;
 
 <template>
   <section :class="styles['catalog-page']">
-    <div :class="styles['page-intro']">
-      <h1>Catalog</h1>
-      <p>Thoughtfully selected tech for a calmer, more capable workspace.</p>
+    <div :class="styles['catalog-heading']">
+      <div>
+        <h1>Catalog</h1>
+        <p>36 products</p>
+      </div>
     </div>
-    <CatalogToolbar />
-    <CatalogGrid :products="catalogProducts" />
+    <div :class="styles['catalog-layout']">
+      <CatalogFilters />
+      <div>
+        <CatalogToolbar />
+        <CatalogGrid :products="catalogProducts" />
+      </div>
+    </div>
   </section>
 </template>
