@@ -4,12 +4,12 @@
   max-height: 46px;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  box-shadow: 0 8px 24px 0 rgba(36, 92, 255, 0.06);
+  box-shadow: var(--shadow-control);
   padding: 12px;
   transition: all 0.2s ease-out;
 
   &--onCatalog {
-    border: 1px solid #aebfff;
+    border: 1px solid var(--color-accent-muted);
     color: var(--color-accent);
 
     &-icon {

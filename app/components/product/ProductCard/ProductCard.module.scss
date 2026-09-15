@@ -1,9 +1,9 @@
 .product-card {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: var(--radius-md);
   // overflow: hidden;
   border: 1px solid var(--color-border);
-  box-shadow: 0 18px 48px 0 rgba(24, 31, 42, 0.07);
+  box-shadow: var(--shadow-card);
   padding: 14px;
 
   display: flex;
@@ -20,12 +20,12 @@
 
     &-discount {
       padding: 6px 8px;
-      background: #fff2d7;
+      background: var(--color-warning-surface);
       border-radius: 999px;
       position: absolute;
       top: 12px;
       left: 12px;
-      color: #9a5c00;
+      color: var(--color-warning-text);
       font-size: 11px;
       font-weight: 800;
     }
@@ -37,8 +37,8 @@
       top: 10px;
       right: 10px;
       border: 1px solid var(--color-border);
-      background: #fff;
-      box-shadow: 0 1px 0 0 rgba(16, 18, 21, 0.02);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-control);
       border-radius: var(--radius-md);
       line-height: normal;
     }
@@ -49,7 +49,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 30px;
-    color: #4a5567;
+    color: var(--color-text-secondary);
     font-size: 12px;
     font-weight: 700;
     line-height: 16px;
@@ -63,7 +63,7 @@
   }
 
   &-name {
-    color: #111827;
+    color: var(--color-text-primary);
     font-size: 16px;
     font-weight: 700;
     line-height: 22px;
@@ -73,12 +73,12 @@
   &-stock {
     display: flex;
     align-items: center;
-    color: #087a55;
+    color: var(--color-success);
     font-size: 11px;
     font-weight: 700;
     line-height: 15px;
     &--empty {
-      color: #b42318;
+      color: var(--color-danger);
     }
   }
 
@@ -87,12 +87,12 @@
     margin-top: 14px;
 
     &-current {
-      color: #111827;
+      color: var(--color-text-primary);
       font-size: 22px;
       line-height: 28px;
     }
     &-old {
-      color: #989da4;
+      color: var(--color-text-muted);
       font-size: 13px;
       text-decoration-line: line-through;
     }
@@ -109,8 +109,8 @@
     border-radius: var(--radius-md);
 
     &:disabled {
-      color: #707b8e;
-      background: #d7dde6;
+      color: var(--color-disabled-text);
+      background: var(--color-disabled-background);
       cursor: auto;
     }
   }
