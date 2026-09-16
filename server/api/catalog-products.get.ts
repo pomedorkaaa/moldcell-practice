@@ -1,5 +1,5 @@
-import { catalogProducts } from "../utils/catalog-data";
+// import { catalogProducts } from "../utils/catalog-data";
 
-export default defineEventHandler(() => {
-  return catalogProducts;
-});
+// export default defineEventHandler(() => {
+//   return catalogProducts;
+// });
