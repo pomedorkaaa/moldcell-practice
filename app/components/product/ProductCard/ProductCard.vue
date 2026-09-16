@@ -41,6 +41,8 @@ const isInStock = computed(() => {
       </span>
       <!-- избранное -->
       <button
+        type="button"
+        aria-label="Add product to favorites"
         @click="emit('add-to-favorites')"
         :class="styles['product-card-actions-like']"
       >
@@ -56,9 +58,7 @@ const isInStock = computed(() => {
           styles['product-card-stock'],
           !isInStock ? [styles['product-card-stock--empty']] : '',
         ]"
-        ><Icon name="fluent-mdl2:location-dot" />{{
-          isInStock ? "In stock" : "Out"
-        }}</span
+        >{{ isInStock ? "In stock" : "Out" }}</span
       >
     </p>
     <!-- название -->
@@ -87,7 +87,7 @@ const isInStock = computed(() => {
       :class="styles['product-card-button']"
       :disabled="!isInStock"
     >
-      {{ isInStock ? "Add To Cart" : "Out of stock" }}
+      {{ isInStock ? "Add to cart" : "Out of stock" }}
     </button>
   </div>
 </template>

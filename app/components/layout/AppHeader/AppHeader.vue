@@ -7,7 +7,7 @@ import SearchResults from "../SearchResults/SearchResults.vue";
 
 const search = ref("");
 const isSearchFocused = ref(false);
-const cartItemsCount = ref(0);
+const cartItemsCount = ref(2);
 const hasCartItems = computed(() => {
   return cartItemsCount.value > 0;
 });
