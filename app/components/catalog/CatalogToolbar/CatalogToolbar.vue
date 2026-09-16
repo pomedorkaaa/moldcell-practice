@@ -9,7 +9,7 @@ const selectedCategory = ref("All products");
   <div :class="styles.toolbar">
     <div :class="styles['toolbar-left']">
       <button type="button" :class="styles['toolbar-button']">Filters</button>
-      <span :class="styles['toolbar-count']">Showing 1–16 of 36</span>
+      <span :class="styles['toolbar-count']">Showing 1–18 of 36</span>
     </div>
     <div :class="styles['toolbar-filters']">
       <button
