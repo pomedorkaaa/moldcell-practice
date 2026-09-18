@@ -1,8 +1,20 @@
 <script setup lang="ts">
+import { catalogSortValues } from "~~/server/schemas/catalog-query";
 import styles from "./CatalogToolbar.module.scss";
 
 const categories = ["All products", "Keyboards", "Mice", "Audio"];
 const selectedCategory = ref("All products");
+
+const route = useRoute();
+
+const emit = defineEmits<{
+  (e: "change", value: string): void;
+}>();
+
+function onSortChange(event: Event) {
+  const target = event.target as HTMLSelectElement;
+  emit("change", target.value);
+}
 </script>
 
 <template>
@@ -25,6 +37,15 @@ const selectedCategory = ref("All products");
         {{ category }}
       </button>
     </div>
-    <button type="button" :class="styles['toolbar-sort']">Newest</button>
+
+    <select
+      :class="styles['toolbar-sort']"
+      :value="route.query.sort || catalogSortValues[0]"
+      @change="onSortChange"
+    >
+      <option v-for="sortValue in catalogSortValues" :value="sortValue">
+        {{ sortValue }}
+      </option>
+    </select>
   </div>
 </template>

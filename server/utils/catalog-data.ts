@@ -1,5 +1,5 @@
 /* 
- import seed from "../data/catalog.seed.json";
+import seed from "../data/catalog.seed.json";
 import type { CatalogProduct } from "#shared/types/catalog";
 
 export const catalogProducts: CatalogProduct[] = seed.products.map(
@@ -13,9 +13,21 @@ export const catalogProducts: CatalogProduct[] = seed.products.map(
 ); 
 */
 
-import { and, asc, desc, eq, gte, lte, type SQL } from "drizzle-orm";
+import {
+  and,
+  asc,
+  desc,
+  eq,
+  gte,
+  lte,
+  gt,
+  inArray,
+  min,
+  max,
+  type SQL,
+} from "drizzle-orm";
 import type { CatalogQuery } from "../schemas/catalog-query";
-import type { CatalogProduct } from "#shared/types/catalog";
+import type { CatalogProduct, CatalogPriceRange } from "#shared/types/catalog";
 
 import { db } from "../db/client";
 import { brands, categories, products } from "../db/schema";
@@ -38,16 +50,26 @@ function createCatalogQuery() {
     .innerJoin(categories, eq(products.categoryId, categories.id));
 }
 
-function getCatalogOrder(sort: CatalogQuery["sort"]): SQL[] {
+function getCatalogOrder({
+  sort,
+  category = [],
+  brand = [],
+}: CatalogQuery): SQL[] {
+  const stockOrder = desc(gt(products.stock, 0));
   switch (sort) {
     case "price-asc":
-      return [asc(products.price), asc(products.id)];
+      return [stockOrder, asc(products.price), asc(products.id)];
     case "price-desc":
-      return [desc(products.price), asc(products.id)];
+      return [stockOrder, desc(products.price), asc(products.id)];
     case "newest":
-      return [desc(products.createdAt), asc(products.id)];
+      return [stockOrder, desc(products.createdAt), asc(products.id)];
     default:
-      return [asc(products.id)];
+      return [
+        stockOrder,
+        ...category.map((slug) => desc(eq(categories.slug, slug))),
+        ...brand.map((slug) => desc(eq(brands.slug, slug))),
+        asc(products.id),
+      ];
   }
 }
 
@@ -61,21 +83,36 @@ function toCatalogProduct(row: CatalogRow): CatalogProduct {
 }
 
 export async function getCatalogProducts(
-  { category, brand, minPrice, maxPrice, sort }: CatalogQuery = {
+  // { category, brand, minPrice, maxPrice, sort }: CatalogQuery = {
+  query: CatalogQuery = {
     sort: "default",
   },
 ): Promise<CatalogProduct[]> {
+  const { category, brand, minPrice, maxPrice, sort } = query;
   const rows = await createCatalogQuery()
     .where(
       and(
-        category ? eq(categories.slug, category) : undefined,
-        brand ? eq(brands.slug, brand) : undefined,
+        category?.length ? inArray(categories.slug, category) : undefined,
+        brand?.length ? inArray(brands.slug, brand) : undefined,
         minPrice !== undefined ? gte(products.price, minPrice) : undefined,
         maxPrice !== undefined ? gte(products.price, maxPrice) : undefined,
       ),
     )
-    .orderBy(...getCatalogOrder(sort));
+    .orderBy(...getCatalogOrder(query));
   return rows.map(toCatalogProduct);
+}
+
+export async function getCatalogPriceRange(): Promise<CatalogPriceRange> {
+  const [range] = await db
+    .select({
+      min: min(products.price),
+      max: max(products.price),
+    })
+    .from(products);
+  return {
+    min: range?.min ?? 0,
+    max: range?.max ?? 0,
+  };
 }
 
 export async function getCatalogProductBySlug(

@@ -7,10 +7,19 @@ export const catalogSortValues = [
   "newest",
 ] as const;
 
+const slug = z.string().trim().min(1);
+
+const selectedSlug = z
+  .union([slug, z.array(slug)])
+  .transform((value) => (Array.isArray(value) ? value : [value]))
+  .optional();
+
 export const catalogQuerySchema = z
   .object({
-    category: z.string().trim().min(1).optional(),
-    brand: z.string().trim().min(1).optional(),
+    // category: z.string().trim().min(1).optional(),
+    // brand: z.string().trim().min(1).optional(),
+    category: selectedSlug,
+    brand: selectedSlug,
     minPrice: z.coerce.number().int().nonnegative().optional(),
     maxPrice: z.coerce.number().int().nonnegative().optional(),
     sort: z.enum(catalogSortValues).default("default"),
