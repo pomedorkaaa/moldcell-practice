@@ -45,10 +45,10 @@
       line-height: normal;
       color: black;
 
-      :global(svg) {
-        width: 15px;
-        height: 15px;
-      }
+      // :global(svg) {
+      //   width: 15px;
+      //   height: 15px;
+      // }
     }
   }
 
@@ -111,21 +111,32 @@
     }
   }
 
-  &-button {
-    width: 100%;
-    min-height: 30px;
-    margin-top: 8px;
-    padding-inline: 8px;
-    font-size: 10px;
-    font-weight: 700;
-    background: var(--color-text-primary);
-    color: var(--color-surface);
-    border-radius: 6px;
+  &-actions {
+    &-button {
+      width: 100%;
+      min-height: 30px;
+      margin-top: 8px;
+      padding-inline: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--color-text-primary);
+      color: var(--color-surface);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
 
-    &:disabled {
-      color: var(--color-disabled-text);
-      background: var(--color-disabled-background);
-      cursor: auto;
+      & > button {
+        color: var(--color-surface);
+        font-size: 12px;
+      }
+
+      &:disabled {
+        color: var(--color-disabled-text);
+        background: var(--color-disabled-background);
+        cursor: auto;
+      }
     }
   }
 }

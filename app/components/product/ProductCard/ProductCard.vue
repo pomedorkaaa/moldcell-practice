@@ -2,16 +2,20 @@
 import styles from "./ProductCard.module.scss";
 import type { ProductCardProps } from "./ProductCard.types";
 import { useFavoriteStore } from "#imports";
+import { useCartStore } from "#imports";
 
 const favoriteStore = useFavoriteStore();
+const cartStore = useCartStore();
 
 const props = defineProps<ProductCardProps>();
 const isFavorite = computed(() => favoriteStore.isFavorite(props.product.id));
+const quantity = computed(() => cartStore.getQuantity(props.product.id));
+const isInCart = computed(() => quantity.value > 0);
 
-const emit = defineEmits<{
-  (e: "add-to-cart"): void;
-  // (e: "add-to-favorites"): void;
-}>();
+// const emit = defineEmits<{
+//   (e: "add-to-cart"): void;
+//   // (e: "add-to-favorites"): void;
+// }>();
 
 const discountPercent = computed(() => {
   const { price, oldPrice } = props.product;
@@ -89,13 +93,21 @@ const isInStock = computed(() => {
       </span>
     </div>
     <!-- добавить в корзину -->
-    <button
-      type="button"
-      @click="emit('add-to-cart')"
-      :class="styles['product-card-button']"
-      :disabled="!isInStock"
-    >
-      {{ isInStock ? "Add to cart" : "Out of stock" }}
-    </button>
+    <div :class="styles['product-card-actions']">
+      <div v-if="isInCart" :class="styles['product-card-actions-button']">
+        <button @click="cartStore.decrementItem(props.product.id)">-</button>
+        <span>{{ quantity }}</span>
+        <button @click="cartStore.addItem(props.product)">+</button>
+      </div>
+      <button
+        v-else
+        type="button"
+        @click="cartStore.addItem(props.product)"
+        :class="styles['product-card-actions-button']"
+        :disabled="!isInStock"
+      >
+        {{ isInStock ? "Add to cart" : "Out of stock" }}
+      </button>
+    </div>
   </div>
 </template>

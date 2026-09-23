@@ -9,6 +9,7 @@ import { useCartStore, useFavoriteStore, type CatalogProduct } from "#imports";
 const favoriteStore = useFavoriteStore();
 const cartStore = useCartStore();
 const route = useRoute();
+const { loggedIn } = useUserSession();
 
 let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
@@ -20,10 +21,14 @@ const isLoading = ref(false);
 const hasCartItems = computed(() => {
   return cartStore.totalItems > 0;
 });
+const hasFavoriteItems = computed(() => {
+  return favoriteStore.totalItems > 0;
+});
 const isCatalogPage = computed(() => route.path === "/catalog");
 const isSearchOpen = computed(
   () => isSearchFocused.value && search.value.trim().length > 0,
 );
+// const cartItemsCount = computed(() => cartStore.items.length);
 
 const handleSearchFocusOut = () => {
   window.setTimeout(() => {
@@ -83,7 +88,10 @@ watch(search, (value) => {
           <SearchResults :products="products" v-if="isSearchOpen" />
         </div>
         <nav :class="styles['header-nav-actions']">
-          <NuxtLink to="/profile" :class="styles['header-nav-action']">
+          <NuxtLink
+            :to="loggedIn ? '/profile' : '/login'"
+            :class="styles['header-nav-action']"
+          >
             <Icon
               name="my-icon:profile"
               :class="styles['header-nav-action-icon']"
@@ -95,7 +103,7 @@ watch(search, (value) => {
               :class="styles['header-nav-action-icon']"
             />
             <span
-              v-if="hasCartItems"
+              v-if="hasFavoriteItems"
               :class="styles['header-nav-action-badge']"
               >{{ favoriteStore.totalItems }}</span
             >
@@ -110,6 +118,7 @@ watch(search, (value) => {
               :class="styles['header-nav-action-badge']"
               >{{ cartStore.totalItems }}</span
             >
+            <!-- >{{ cartItemsCount }}</span -->
           </NuxtLink>
         </nav>
       </div>

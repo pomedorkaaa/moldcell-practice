@@ -19,6 +19,7 @@
     "drizzle-orm": "^0.45.2",
     "normalize.css": "^8.0.1",
     "nuxt": "^4.5.2",
+    "nuxt-auth-utils": "^0.5.30",
     "pg": "^8.23.0",
     "pinia": "^4.0.3",
     "pinia-plugin-persistedstate": "^4.7.1",

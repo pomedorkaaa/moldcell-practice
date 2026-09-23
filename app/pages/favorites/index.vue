@@ -7,14 +7,15 @@ import { useFavoriteStore } from "#imports";
 // const favoriteProducts = mockCatalogProducts;
 const favoriteStore = useFavoriteStore();
 
-const products = favoriteStore.items;
+const products = computed(() => favoriteStore.items);
+const totalItems = computed(() => favoriteStore.totalItems);
 </script>
 
 <template>
   <section :class="styles['favorites-page']">
     <div :class="styles['catalog-heading']">
       <h1>Favorites</h1>
-      <p>3 products</p>
+      <p>{{ totalItems }} products</p>
     </div>
     <CatalogGrid :products="products" />
   </section>

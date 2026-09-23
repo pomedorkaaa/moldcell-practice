@@ -6,21 +6,21 @@ import { useCartStore } from "#imports";
 const cartStore = useCartStore();
 
 // const cartItems = ref(mockCartProducts.map((product) => ({ ...product, quantity: 1 })));
-const cartItems = ref(cartStore.items);
+const cartItems = computed(() => cartStore.items);
 // const subtotal = computed(() =>
 //   cartItems.value.reduce(
 //     (total, item) => total + item.price * item.quantity,
 //     0,
 //   ),
 // );
-const subtotal = ref(cartStore.totalPrice);
+const subtotal = computed(() => cartStore.totalPrice);
 const shipping = computed(() => (subtotal.value >= 100 ? 0 : 9));
 const total = computed(() => subtotal.value + shipping.value);
 
-const changeQuantity = (index: number, direction: number) => {
-  const item = cartItems.value[index];
-  item.quantity = Math.max(1, item.quantity + direction);
-};
+// const changeQuantity = (index: number, direction: number) => {
+//   const item = cartItems.value[index];
+//   item.quantity = Math.max(1, item.quantity + direction);
+// };
 </script>
 
 <template>
@@ -32,38 +32,38 @@ const changeQuantity = (index: number, direction: number) => {
     <div :class="styles.layout">
       <section :class="styles.items" aria-label="Cart items">
         <article
-          v-for="(item, index) in cartItems"
-          :key="item.id"
+          v-for="item in cartItems"
+          :key="item.product.id"
           :class="styles.item"
         >
           <NuxtLink
-            :to="`/products/${item.slug}`"
+            :to="`/products/${item.product.slug}`"
             :class="styles['item-media']"
           >
             <img
-              :src="item.images[0]"
-              :alt="item.name"
+              :src="item.product.images[0]"
+              :alt="item.product.name"
               :class="styles['item-image']"
             />
           </NuxtLink>
           <div :class="styles['item-details']">
             <p :class="styles['item-category']">
-              {{ item.brand?.name }} / {{ item.category?.name }}
+              {{ item.product.brand.name }} / {{ item.product.category.name }}
             </p>
             <NuxtLink
-              :to="`/products/${item.slug}`"
+              :to="`/products/${item.product.slug}`"
               :class="styles['item-name']"
-              >{{ item.name }}</NuxtLink
+              >{{ item.product.name }}</NuxtLink
             >
             <div :class="styles['item-controls']">
               <div
                 :class="styles['item-quantity']"
-                :aria-label="`${item.name} quantity`"
+                :aria-label="`${item.product.name} quantity`"
               >
                 <button
                   type="button"
                   aria-label="Decrease quantity"
-                  @click="changeQuantity(index, -1)"
+                  @click="cartStore.decrementItem(item.product.id)"
                 >
                   −
                 </button>
@@ -71,18 +71,22 @@ const changeQuantity = (index: number, direction: number) => {
                 <button
                   type="button"
                   aria-label="Increase quantity"
-                  @click="changeQuantity(index, 1)"
+                  @click="cartStore.addItem(item.product)"
                 >
                   +
                 </button>
               </div>
-              <button type="button" :class="styles['item-remove']">
+              <button
+                type="button"
+                :class="styles['item-remove']"
+                @click="cartStore.removeItem(item.product.id)"
+              >
                 Remove
               </button>
             </div>
           </div>
           <strong :class="styles['item-total']"
-            >${{ item.price * item.quantity }}</strong
+            >${{ item.product.price * item.quantity }}</strong
           >
         </article>
       </section>

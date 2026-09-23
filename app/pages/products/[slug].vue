@@ -3,8 +3,10 @@ import styles from "./ProductPage.module.scss";
 import { mockProduct } from "~/utils/mock-products";
 import type { CatalogProduct } from "#imports";
 import { useCartStore } from "@/stores/cart.ts";
+import { useFavoriteStore } from "#imports";
 
 const cartStore = useCartStore();
+const favoriteStore = useFavoriteStore();
 const route = useRoute();
 const slug = route.params.slug;
 
@@ -14,6 +16,9 @@ const handleAddToCart = (item: CatalogProduct, quantity: number) => {
 
 const { data: product } = await useFetch<CatalogProduct>(
   `/api/products/${slug}`,
+);
+const isFavorite = computed(() =>
+  favoriteStore.isFavorite(Number(product.value?.id)),
 );
 
 // const product = mockProduct;
@@ -57,6 +62,17 @@ definePageMeta({
           </button>
         </div>
         <div :class="styles['gallery-main']">
+          <button
+            type="button"
+            aria-label="Add product to favorites"
+            @click="favoriteStore.toggleItem(product)"
+            :class="styles['gallery-main-like_action']"
+          >
+            <Icon
+              :name="`my-icon:${!isFavorite ? 'heart' : 'heart-filled'}`"
+              mode="svg"
+            />
+          </button>
           <img :src="selectedImage" :alt="product.name" />
         </div>
       </div>

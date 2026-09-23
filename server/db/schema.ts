@@ -47,3 +47,17 @@ export const products = pgTable(
   },
   (table) => [check("products_stock_non_negative", sql`${table.stock} >= 0`)],
 );
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  email: text("email").notNull(),
+  lastName: text("last_name").notNull(),
+  passwordHash: text("password_hash").notNull(),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+    mode: "date",
+  })
+    .notNull()
+    .defaultNow(),
+});
