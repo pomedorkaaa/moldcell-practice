@@ -4,12 +4,9 @@ import MainSectionHeader from "../MainSectionHeader/MainSectionHeader.vue";
 import styles from "./MainPopular.module.scss";
 import type { CatalogProduct } from "~~/shared/types/catalog.ts";
 
-const { data: products } = await useFetch<CatalogProduct[]>(
-  "/api/catalog-products",
-  {
-    default: () => [],
-  },
-);
+const { data: products } = await useFetch<CatalogProduct[]>("/api/products", {
+  default: () => [],
+});
 
 const popularProductsIds = [1, 9, 15, 20];
 
@@ -20,15 +17,15 @@ const popularProducts = computed(() => {
 });
 
 // console.log(popularProducts);
-console.log(products);
+// console.log(products);
 
-const handleAddToCart = (product: CatalogProduct) => {
-  console.log("Добавить в корзину: ", product.id);
-};
+// const handleAddToCart = (product: CatalogProduct) => {
+//   console.log("Добавить в корзину: ", product.id);
+// };
 
-const handleAddToFavorites = (product: CatalogProduct) => {
-  console.log("Добавить в избранное: ", product);
-};
+// const handleAddToFavorites = (product: CatalogProduct) => {
+//   console.log("Добавить в избранное: ", product);
+// };
 </script>
 
 <template>
@@ -43,9 +40,9 @@ const handleAddToFavorites = (product: CatalogProduct) => {
         v-for="product in popularProducts"
         :product="product"
         :key="product.id"
-        @add-to-cart="handleAddToCart(product)"
-        @add-to-favorites="handleAddToFavorites(product)"
       />
+      <!-- @add-to-cart="handleAddToCart(product)" -->
+      <!-- @add-to-favorites="handleAddToFavorites(product)" -->
     </section>
   </div>
 </template>

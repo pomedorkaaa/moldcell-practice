@@ -25,6 +25,11 @@ export interface Product {
 }
 
 export interface CatalogProduct extends Product {
-  brand: Brand | null;
-  category: Category | null;
+  brand: Brand;
+  category: Category;
+}
+
+export interface CatalogPriceRange {
+  min: number;
+  max: number;
 }

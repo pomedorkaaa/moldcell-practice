@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import styles from "./ProductCard.module.scss";
 import type { ProductCardProps } from "./ProductCard.types";
-const props = defineProps<ProductCardProps>();
+import { useFavoriteStore } from "#imports";
+import { useCartStore } from "#imports";
 
-const emit = defineEmits<{
-  (e: "add-to-cart"): void;
-  (e: "add-to-favorites"): void;
-}>();
+const favoriteStore = useFavoriteStore();
+const cartStore = useCartStore();
+
+const props = defineProps<ProductCardProps>();
+const isFavorite = computed(() => favoriteStore.isFavorite(props.product.id));
+const quantity = computed(() => cartStore.getQuantity(props.product.id));
+const isInCart = computed(() => quantity.value > 0);
+
+// const emit = defineEmits<{
+//   (e: "add-to-cart"): void;
+//   // (e: "add-to-favorites"): void;
+// }>();
 
 const discountPercent = computed(() => {
   const { price, oldPrice } = props.product;
@@ -41,10 +50,15 @@ const isInStock = computed(() => {
       </span>
       <!-- избранное -->
       <button
-        @click="emit('add-to-favorites')"
+        type="button"
+        aria-label="Add product to favorites"
+        @click="favoriteStore.toggleItem(props.product)"
         :class="styles['product-card-actions-like']"
       >
-        <Icon name="my-icon:heart" />
+        <Icon
+          :name="`my-icon:${!isFavorite ? 'heart' : 'heart-filled'}`"
+          mode="svg"
+        />
       </button>
     </div>
     <!-- бренд/категория -->
@@ -56,9 +70,7 @@ const isInStock = computed(() => {
           styles['product-card-stock'],
           !isInStock ? [styles['product-card-stock--empty']] : '',
         ]"
-        ><Icon name="fluent-mdl2:location-dot" />{{
-          isInStock ? "In stock" : "Out"
-        }}</span
+        >{{ isInStock ? "In stock" : "Out" }}</span
       >
     </p>
     <!-- название -->
@@ -81,13 +93,21 @@ const isInStock = computed(() => {
       </span>
     </div>
     <!-- добавить в корзину -->
-    <button
-      type="button"
-      @click="emit('add-to-cart')"
-      :class="styles['product-card-button']"
-      :disabled="!isInStock"
-    >
-      {{ isInStock ? "Add To Cart" : "Out of stock" }}
-    </button>
+    <div :class="styles['product-card-actions']">
+      <div v-if="isInCart" :class="styles['product-card-actions-button']">
+        <button @click="cartStore.decrementItem(props.product.id)">-</button>
+        <span>{{ quantity }}</span>
+        <button @click="cartStore.addItem(props.product)">+</button>
+      </div>
+      <button
+        v-else
+        type="button"
+        @click="cartStore.addItem(props.product)"
+        :class="styles['product-card-actions-button']"
+        :disabled="!isInStock"
+      >
+        {{ isInStock ? "Add to cart" : "Out of stock" }}
+      </button>
+    </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 .footer {
-  background: black;
+  background: var(--color-surface-inverted);
   padding-block: 54px 24px;
 
   &-inner {
@@ -18,7 +18,7 @@
         display: flex;
         flex-direction: column;
         gap: 11px;
-        color: #d4d7db;
+        color: var(--color-text-on-dark);
 
         &-heading {
           margin-block: 0 7px;
@@ -38,10 +38,10 @@
 
   &-copyright {
     margin-top: 44px;
-    border-top: 1px solid #282b2f;
+    border-top: 1px solid var(--color-border-dark);
     display: flex;
     justify-content: space-between;
-    color: #737980;
+    color: var(--color-text-secondary);
     font-size: 12px;
   }
 }

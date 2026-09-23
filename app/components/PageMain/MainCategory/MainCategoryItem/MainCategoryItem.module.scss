@@ -1,8 +1,8 @@
 .main-category-item {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  box-shadow: 0 18px 48px 0 rgba(24, 31, 42, 0.07);
+  box-shadow: var(--shadow-card);
   padding: 8px 10px;
 
   flex: 1 0 170px;

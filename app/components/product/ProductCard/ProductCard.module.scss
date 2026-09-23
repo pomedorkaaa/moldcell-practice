@@ -1,11 +1,9 @@
 .product-card {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: var(--radius-md);
-  // overflow: hidden;
   border: 1px solid var(--color-border);
-  box-shadow: 0 18px 48px 0 rgba(24, 31, 42, 0.07);
-  padding: 14px;
-
+  box-shadow: 0 8px 22px rgba(24, 31, 42, 0.04);
+  padding: 12px;
   display: flex;
   flex-direction: column;
 
@@ -13,34 +11,44 @@
     position: relative;
 
     &-image {
-      border-radius: var(--radius-md);
-      aspect-ratio: 4/3;
+      width: 100%;
+      border-radius: 6px;
+      aspect-ratio: 3/2;
       object-fit: cover;
     }
 
     &-discount {
-      padding: 6px 8px;
-      background: #fff2d7;
+      padding: 4px 6px;
+      background: var(--color-warning-surface);
       border-radius: 999px;
       position: absolute;
-      top: 12px;
-      left: 12px;
-      color: #9a5c00;
-      font-size: 11px;
+      top: 8px;
+      left: 8px;
+      color: var(--color-warning-text);
+      font-size: 9px;
       font-weight: 800;
+      line-height: 12px;
     }
 
     &-like {
       display: flex;
-      padding: 10px;
+      align-items: center;
+      justify-content: center;
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
       border: 1px solid var(--color-border);
-      background: #fff;
-      box-shadow: 0 1px 0 0 rgba(16, 18, 21, 0.02);
-      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      border-radius: 6px;
       line-height: normal;
+      color: black;
+
+      // :global(svg) {
+      //   width: 15px;
+      //   height: 15px;
+      // }
     }
   }
 
@@ -48,70 +56,87 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 30px;
-    color: #4a5567;
-    font-size: 12px;
+    color: var(--color-text-secondary);
+    font-size: 9px;
     font-weight: 700;
-    line-height: 16px;
-    padding-block: 13px 7px;
+    line-height: 12px;
+    padding-block: 10px 5px;
     margin: unset;
-
-    @media (max-width: 860px) {
-      flex-direction: column;
-      align-items: flex-start;
-    }
   }
 
   &-name {
-    color: #111827;
-    font-size: 16px;
+    color: var(--color-text-primary);
+    font-size: 12px;
     font-weight: 700;
-    line-height: 22px;
+    line-height: 16px;
     flex-grow: 1;
   }
 
   &-stock {
     display: flex;
     align-items: center;
-    color: #087a55;
-    font-size: 11px;
+    color: var(--color-success);
+    font-size: 9px;
     font-weight: 700;
-    line-height: 15px;
+    line-height: 12px;
+
+    &::before {
+      width: 4px;
+      height: 4px;
+      margin-right: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      content: "";
+    }
+
     &--empty {
-      color: #b42318;
+      color: var(--color-danger);
     }
   }
 
   &-prices {
     font-weight: 700;
-    margin-top: 14px;
+    margin-top: 10px;
 
     &-current {
-      color: #111827;
-      font-size: 22px;
-      line-height: 28px;
+      color: var(--color-text-primary);
+      font-size: 18px;
+      line-height: 22px;
     }
     &-old {
-      color: #989da4;
-      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-left: 3px;
+      font-size: 9px;
       text-decoration-line: line-through;
     }
   }
 
-  &-button {
-    width: 100%;
-    margin-top: 10px;
-    padding-block: 14px;
-    font-size: 13px;
-    font-weight: 700;
-    background: var(--color-text-primary);
-    color: var(--color-surface);
-    border-radius: var(--radius-md);
+  &-actions {
+    &-button {
+      width: 100%;
+      min-height: 30px;
+      margin-top: 8px;
+      padding-inline: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--color-text-primary);
+      color: var(--color-surface);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
 
-    &:disabled {
-      color: #707b8e;
-      background: #d7dde6;
-      cursor: auto;
+      & > button {
+        color: var(--color-surface);
+        font-size: 12px;
+      }
+
+      &:disabled {
+        color: var(--color-disabled-text);
+        background: var(--color-disabled-background);
+        cursor: auto;
+      }
     }
   }
 }
