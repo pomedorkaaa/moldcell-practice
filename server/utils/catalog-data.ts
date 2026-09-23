@@ -25,6 +25,8 @@ import {
   min,
   max,
   type SQL,
+  ilike,
+  or,
 } from "drizzle-orm";
 import type { CatalogQuery } from "../schemas/catalog-query";
 import type { CatalogProduct, CatalogPriceRange } from "#shared/types/catalog";
@@ -88,14 +90,21 @@ export async function getCatalogProducts(
     sort: "default",
   },
 ): Promise<CatalogProduct[]> {
-  const { category, brand, minPrice, maxPrice, sort } = query;
+  const { category, brand, minPrice, maxPrice, search } = query;
   const rows = await createCatalogQuery()
     .where(
       and(
         category?.length ? inArray(categories.slug, category) : undefined,
         brand?.length ? inArray(brands.slug, brand) : undefined,
         minPrice !== undefined ? gte(products.price, minPrice) : undefined,
-        maxPrice !== undefined ? gte(products.price, maxPrice) : undefined,
+        maxPrice !== undefined ? lte(products.price, maxPrice) : undefined,
+        search
+          ? or(
+              ilike(products.name, `%${search}%`),
+              ilike(brands.name, `%${search}%`),
+              ilike(categories.name, `%${search}%`),
+            )
+          : undefined,
       ),
     )
     .orderBy(...getCatalogOrder(query));

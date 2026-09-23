@@ -1,18 +1,25 @@
-<script setup>
+<script setup lang="ts">
 import AppLogo from "../AppLogo/AppLogo.vue";
 import BaseContainer from "../ui/BaseContainer/BaseContainer.vue";
 import styles from "./AppHeader.module.scss";
 import CatalogButton from "./CatalogButton/CatalogButton.vue";
 import SearchResults from "../SearchResults/SearchResults.vue";
+import { useCartStore, useFavoriteStore, type CatalogProduct } from "#imports";
+
+const favoriteStore = useFavoriteStore();
+const cartStore = useCartStore();
+const route = useRoute();
+
+let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
 const search = ref("");
+const products = ref<CatalogProduct[]>([]);
 const isSearchFocused = ref(false);
-const cartItemsCount = ref(2);
-const hasCartItems = computed(() => {
-  return cartItemsCount.value > 0;
-});
+const isLoading = ref(false);
 
-const route = useRoute();
+const hasCartItems = computed(() => {
+  return cartStore.totalItems > 0;
+});
 const isCatalogPage = computed(() => route.path === "/catalog");
 const isSearchOpen = computed(
   () => isSearchFocused.value && search.value.trim().length > 0,
@@ -23,6 +30,33 @@ const handleSearchFocusOut = () => {
     isSearchFocused.value = false;
   }, 0);
 };
+
+watch(search, (value) => {
+  clearTimeout(timeoutId);
+
+  const query = value.trim();
+
+  if (query.length < 2) {
+    products.value = [];
+    return;
+  }
+
+  timeoutId = setTimeout(async () => {
+    isLoading.value = true;
+
+    try {
+      products.value = await $fetch<CatalogProduct[]>("/api/products", {
+        query: {
+          search: query,
+        },
+      });
+    } finally {
+      isLoading.value = false;
+      console.log(products.value);
+      // console.log(value);
+    }
+  }, 300);
+});
 </script>
 
 <template>
@@ -46,7 +80,7 @@ const handleSearchFocusOut = () => {
             :class="styles['header-search-icon']"
             mode="svg"
           />
-          <SearchResults v-if="isSearchOpen" />
+          <SearchResults :products="products" v-if="isSearchOpen" />
         </div>
         <nav :class="styles['header-nav-actions']">
           <NuxtLink to="/profile" :class="styles['header-nav-action']">
@@ -60,6 +94,11 @@ const handleSearchFocusOut = () => {
               name="my-icon:heart"
               :class="styles['header-nav-action-icon']"
             />
+            <span
+              v-if="hasCartItems"
+              :class="styles['header-nav-action-badge']"
+              >{{ favoriteStore.totalItems }}</span
+            >
           </NuxtLink>
           <NuxtLink to="/cart" :class="styles['header-nav-action']">
             <Icon
@@ -69,7 +108,7 @@ const handleSearchFocusOut = () => {
             <span
               v-if="hasCartItems"
               :class="styles['header-nav-action-badge']"
-              >{{ cartItemsCount }}</span
+              >{{ cartStore.totalItems }}</span
             >
           </NuxtLink>
         </nav>

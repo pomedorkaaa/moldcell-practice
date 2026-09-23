@@ -1,18 +1,45 @@
 <script setup lang="ts">
 import styles from "./ProductPage.module.scss";
 import { mockProduct } from "~/utils/mock-products";
+import type { CatalogProduct } from "#imports";
+import { useCartStore } from "@/stores/cart.ts";
+
+const cartStore = useCartStore();
+const route = useRoute();
+const slug = route.params.slug;
+
+const handleAddToCart = (item: CatalogProduct, quantity: number) => {
+  cartStore.addItem(item, quantity);
+};
+
+const { data: product } = await useFetch<CatalogProduct>(
+  `/api/products/${slug}`,
+);
+
+// const product = mockProduct;
+const selectedImage = ref(product.value?.images[0]);
+const quantity = ref(1);
+
+const decreaseQuantity = () => {
+  if (quantity.value > 1) {
+    quantity.value--;
+  }
+};
+
+const increaseQuantity = () => {
+  const maxStock = product.value?.stock ?? 1;
+  if (quantity.value < maxStock) {
+    quantity.value++;
+  }
+};
 
 definePageMeta({
   key: (route) => route.path,
 });
-
-const product = mockProduct;
-const selectedImage = ref(product.images[0]);
-const quantity = ref(1);
 </script>
 
 <template>
-  <article :class="styles['product-page']">
+  <article v-if="product" :class="styles['product-page']">
     <div :class="styles['product-layout']">
       <div :class="styles.gallery">
         <div :class="styles['gallery-thumbs']">
@@ -20,7 +47,10 @@ const quantity = ref(1);
             v-for="image in product.images"
             :key="image"
             type="button"
-            :class="[styles['gallery-thumb'], selectedImage === image && styles['gallery-thumb--active']]"
+            :class="[
+              styles['gallery-thumb'],
+              selectedImage === image && styles['gallery-thumb--active'],
+            ]"
             @click="selectedImage = image"
           >
             <img :src="image" :alt="`${product.name} preview`" />
@@ -32,28 +62,63 @@ const quantity = ref(1);
       </div>
 
       <div :class="styles.info">
-        <p :class="styles['info-eyebrow']">{{ product.brand?.name }} / {{ product.category?.name }}</p>
+        <p :class="styles['info-eyebrow']">
+          {{ product.brand.name }} / {{ product.category.name }}
+        </p>
         <h1 :class="styles['info-title']">{{ product.name }}</h1>
-        <p :class="styles['info-description']">{{ product.description }}</p>
+        <p :class="styles['info-description']">
+          {{ product.description }}
+        </p>
         <div :class="styles['info-price']">
-          <span :class="styles['info-price-current']">${{ product.price }}</span>
-          <span :class="styles['info-price-old']">${{ product.oldPrice }}</span>
+          <span :class="styles['info-price-current']"
+            >${{ product.price }}</span
+          >
+          <span v-if="product.oldPrice" :class="styles['info-price-old']"
+            >${{ product.oldPrice }}</span
+          >
         </div>
         <p :class="styles['info-stock']">In stock · ready to ship</p>
 
         <div :class="styles.purchase">
-          <div :class="styles['purchase-quantity']" aria-label="Product quantity">
-            <button type="button" aria-label="Decrease quantity" @click="quantity = Math.max(1, quantity - 1)">−</button>
+          <div
+            :class="styles['purchase-quantity']"
+            aria-label="Product quantity"
+          >
+            <button
+              type="button"
+              @click="decreaseQuantity"
+              :disabled="quantity <= 1"
+            >
+              −
+            </button>
             <span>{{ quantity }}</span>
-            <button type="button" aria-label="Increase quantity" @click="quantity++">+</button>
+            <button
+              type="button"
+              @click="increaseQuantity"
+              :disabled="quantity >= (product?.stock ?? 1)"
+            >
+              +
+            </button>
           </div>
-          <button type="button" :class="styles['purchase-button']">Add to cart</button>
+          <button
+            @click="handleAddToCart(product, quantity)"
+            type="button"
+            :class="styles['purchase-button']"
+          >
+            Add to cart
+          </button>
         </div>
 
         <div :class="styles.perks">
-          <div :class="styles['perks-item']"><strong>Free shipping</strong> on orders over $100.</div>
-          <div :class="styles['perks-item']"><strong>30-day returns</strong> if it is not the right fit.</div>
-          <div :class="styles['perks-item']"><strong>Secure checkout</strong> with every order.</div>
+          <div :class="styles['perks-item']">
+            <strong>Free shipping</strong> on orders over $100.
+          </div>
+          <div :class="styles['perks-item']">
+            <strong>30-day returns</strong> if it is not the right fit.
+          </div>
+          <div :class="styles['perks-item']">
+            <strong>Secure checkout</strong> with every order.
+          </div>
         </div>
       </div>
     </div>

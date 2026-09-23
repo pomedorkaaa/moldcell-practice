@@ -23,6 +23,7 @@ export const catalogQuerySchema = z
     minPrice: z.coerce.number().int().nonnegative().optional(),
     maxPrice: z.coerce.number().int().nonnegative().optional(),
     sort: z.enum(catalogSortValues).default("default"),
+    search: z.string().trim().min(1).max(100).optional(),
   })
   .refine(
     ({ minPrice, maxPrice }) => {

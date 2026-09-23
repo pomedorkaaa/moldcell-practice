@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import styles from "./ProductCard.module.scss";
 import type { ProductCardProps } from "./ProductCard.types";
+import { useFavoriteStore } from "#imports";
+
+const favoriteStore = useFavoriteStore();
+
 const props = defineProps<ProductCardProps>();
+const isFavorite = computed(() => favoriteStore.isFavorite(props.product.id));
 
 const emit = defineEmits<{
   (e: "add-to-cart"): void;
-  (e: "add-to-favorites"): void;
+  // (e: "add-to-favorites"): void;
 }>();
 
 const discountPercent = computed(() => {
@@ -43,10 +48,13 @@ const isInStock = computed(() => {
       <button
         type="button"
         aria-label="Add product to favorites"
-        @click="emit('add-to-favorites')"
+        @click="favoriteStore.toggleItem(props.product)"
         :class="styles['product-card-actions-like']"
       >
-        <Icon name="my-icon:heart" />
+        <Icon
+          :name="`my-icon:${!isFavorite ? 'heart' : 'heart-filled'}`"
+          mode="svg"
+        />
       </button>
     </div>
     <!-- бренд/категория -->

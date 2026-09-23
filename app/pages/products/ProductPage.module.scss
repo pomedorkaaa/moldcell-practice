@@ -129,6 +129,11 @@
     height: 40px;
     color: var(--color-text-secondary);
     font-size: 18px;
+
+    &:disabled {
+      cursor: not-allowed;
+      color: var(--color-text-muted);
+    }
   }
 
   &-quantity span {
