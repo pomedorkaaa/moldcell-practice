@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import styles from "./ProductCard.module.scss";
 import type { ProductCardProps } from "./ProductCard.types";
-import { useFavoriteStore } from "#imports";
-import { useCartStore } from "#imports";
+import { useFavoriteStore } from "../../../stores/favorites";
+import { useCartStore } from "../../../stores/cart";
 
 const favoriteStore = useFavoriteStore();
 const cartStore = useCartStore();
@@ -29,6 +29,10 @@ const discountPercent = computed(() => {
 const isInStock = computed(() => {
   return props.product.stock > 0;
 });
+
+async function handleToggleFavorite() {
+  await favoriteStore.toggleItem(props.product);
+}
 </script>
 
 <template>
@@ -52,7 +56,7 @@ const isInStock = computed(() => {
       <button
         type="button"
         aria-label="Add product to favorites"
-        @click="favoriteStore.toggleItem(props.product)"
+        @click="handleToggleFavorite"
         :class="styles['product-card-actions-like']"
       >
         <Icon

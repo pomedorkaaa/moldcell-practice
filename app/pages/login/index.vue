@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import styles from "./AuthPage.module.scss";
+
 const email = ref("");
 const password = ref("");
 
@@ -40,36 +42,42 @@ useSeoMeta({
 </script>
 
 <template>
-  <main>
-    <form @submit.prevent="handleSubmit">
-      <h1>Login</h1>
+  <main :class="styles['auth-page']">
+    <section :class="styles.card">
+      <div :class="styles.intro">
+        <h1>Welcome back</h1>
+        <p>Sign in to keep your cart and favorites connected to your account.</p>
+      </div>
 
-      <label>
-        Email
+      <form :class="styles.form" @submit.prevent="handleSubmit">
+        <label :class="styles.field">
+          <span>Email</span>
 
-        <input v-model="email" type="email" autocomplete="email" required />
-      </label>
+          <input v-model="email" type="email" autocomplete="email" required />
+        </label>
 
-      <label>
-        Password
+        <label :class="styles.field">
+          <span>Password</span>
 
-        <input
-          v-model="password"
-          type="password"
-          autocomplete="current-password"
-          required
-        />
-      </label>
+          <input
+            v-model="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </label>
 
-      <p v-if="errorMessage">
-        {{ errorMessage }}
+        <p v-if="errorMessage" :class="styles.error">{{ errorMessage }}</p>
+
+        <button :class="styles.submit" type="submit" :disabled="isLoading">
+          {{ isLoading ? "Signing in..." : "Sign in" }}
+        </button>
+      </form>
+
+      <p :class="styles.footer">
+        Don't have an account?
+        <NuxtLink to="/register">Create one</NuxtLink>
       </p>
-
-      <button type="submit" :disabled="isLoading">
-        {{ isLoading ? "Logging in..." : "Login" }}
-      </button>
-
-      <NuxtLink to="/register"> Create account </NuxtLink>
-    </form>
+    </section>
   </main>
 </template>

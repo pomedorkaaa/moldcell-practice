@@ -4,7 +4,9 @@ import BaseContainer from "../ui/BaseContainer/BaseContainer.vue";
 import styles from "./AppHeader.module.scss";
 import CatalogButton from "./CatalogButton/CatalogButton.vue";
 import SearchResults from "../SearchResults/SearchResults.vue";
-import { useCartStore, useFavoriteStore, type CatalogProduct } from "#imports";
+import { useCartStore } from "../../../stores/cart";
+import { useFavoriteStore } from "../../../stores/favorites";
+import type { CatalogProduct } from "#shared/types/catalog";
 
 const favoriteStore = useFavoriteStore();
 const cartStore = useCartStore();

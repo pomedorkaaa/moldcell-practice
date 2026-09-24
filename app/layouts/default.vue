@@ -11,6 +11,22 @@ const pagesArr = computed(() => route.fullPath.split("/").slice(1));
 // console.log("ishomeeeee", isHome.value);
 // console.log("routeeedeeee", pagesArr.value.length);
 // console.log("routeeedeeee", route.fullPath.split("/"));
+
+const cartStore = useCartStore();
+const favoriteStore = useFavoriteStore();
+const { loggedIn } = useUserSession();
+
+const loadStores = async () => {
+  cartStore.reset();
+  favoriteStore.reset();
+
+  await Promise.all([
+    cartStore.fetchItems(),
+    favoriteStore.fetchItems(),
+  ]);
+};
+
+watch(loggedIn, loadStores, { immediate: true });
 </script>
 
 <template>

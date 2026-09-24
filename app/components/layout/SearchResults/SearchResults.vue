@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from "./SearchResults.module.scss";
-import type { CatalogProduct, Category } from "#imports";
+import type { CatalogProduct, Category } from "#shared/types/catalog";
 
 // interface SearchResult {
 //   name: string;

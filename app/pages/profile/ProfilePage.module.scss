@@ -88,6 +88,15 @@
       background: var(--color-background);
       color: var(--color-accent);
     }
+
+    .logout-button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
   }
 }
 

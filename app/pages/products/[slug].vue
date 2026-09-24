@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import styles from "./ProductPage.module.scss";
 import { mockProduct } from "~/utils/mock-products";
-import type { CatalogProduct } from "#imports";
+import type { CatalogProduct } from "#shared/types/catalog";
 import { useCartStore } from "@/stores/cart.ts";
-import { useFavoriteStore } from "#imports";
+import { useFavoriteStore } from "../../stores/favorites";
 
 const cartStore = useCartStore();
 const favoriteStore = useFavoriteStore();
@@ -14,9 +14,17 @@ const handleAddToCart = (item: CatalogProduct, quantity: number) => {
   cartStore.addItem(item, quantity);
 };
 
-const { data: product } = await useFetch<CatalogProduct>(
+const { data: product, error: productError } = await useFetch<CatalogProduct>(
   `/api/products/${slug}`,
 );
+
+if (productError.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Product not found",
+    fatal: true,
+  });
+}
 const isFavorite = computed(() =>
   favoriteStore.isFavorite(Number(product.value?.id)),
 );
@@ -37,6 +45,10 @@ const increaseQuantity = () => {
     quantity.value++;
   }
 };
+
+async function handleToggleFavorite() {
+  await favoriteStore.toggleItem(product.value!);
+}
 
 definePageMeta({
   key: (route) => route.path,
@@ -65,7 +77,7 @@ definePageMeta({
           <button
             type="button"
             aria-label="Add product to favorites"
-            @click="favoriteStore.toggleItem(product)"
+            @click="handleToggleFavorite"
             :class="styles['gallery-main-like_action']"
           >
             <Icon

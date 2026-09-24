@@ -1,6 +1,6 @@
 import type { LocationQuery } from "vue-router";
 
-import type { Brand, Category, CatalogPriceRange } from "#imports";
+import type { Brand, Category, CatalogPriceRange } from "#shared/types/catalog";
 
 export interface CatalogFilterPatch {
   category?: string[];

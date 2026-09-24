@@ -7,6 +7,7 @@ import {
   serial,
   text,
   timestamp,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 
 export const categories = pgTable("categories", {
@@ -38,8 +39,7 @@ export const products = pgTable(
     stock: integer("stock").notNull().default(0),
     description: text("description").notNull(),
     images: text("images").array().notNull(),
-    createdAt: timestamp("created_at", {
-      withTimezone: true,
+    createdAt: timestamp("created_at",     {
       mode: "date",
     })
       .notNull()
@@ -55,9 +55,65 @@ export const users = pgTable("users", {
   lastName: text("last_name").notNull(),
   passwordHash: text("password_hash").notNull(),
   createdAt: timestamp("created_at", {
-    withTimezone: true,
     mode: "date",
   })
     .notNull()
     .defaultNow(),
 });
+ 
+export const favorites = pgTable(
+  "favorites",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id").references(() => users.id, {
+      onDelete: "cascade",
+    }),
+    guestId: text("guest_id"),
+    productId: integer("product_id")
+      .notNull()
+      .references(() => products.id, {
+        onDelete: "cascade",
+      }),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("favorites_user_product_unique").on(
+      table.userId,
+      table.productId,
+    ),
+    uniqueIndex("favorites_guest_product_unique").on(
+      table.guestId,
+      table.productId,
+    ),
+    check(
+      "favorites_owner_check",
+      sql`num_nonnulls(${table.userId}, ${table.guestId}) = 1`,
+    ),
+  ],
+);
+
+export const cart = pgTable(
+  "cart",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id").references(() => users.id, {
+      onDelete: "cascade",
+    }),
+    guestId: text("guest_id"),
+    productId: integer("product_id")
+      .notNull()
+      .references(() => products.id, {
+        onDelete: "cascade",
+      }),
+    quantity: integer("quantity").notNull().default(1),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("cart_user_product_unique").on(table.userId, table.productId),
+    uniqueIndex("cart_guest_product_unique").on(table.guestId, table.productId),
+    check(
+      "cart_owner_check",
+      sql`num_nonnulls(${table.userId}, ${table.guestId}) = 1`,
+    ),
+  ],
+);

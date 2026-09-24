@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import styles from "./CartPage.module.scss";
 // import { mockCartProducts } from "~/utils/mock-products";
-import { useCartStore } from "#imports";
+import { useCartStore } from "../../stores/cart";
 
 const cartStore = useCartStore();
 

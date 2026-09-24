@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 
-import type { CatalogProduct } from "#imports";
+import type { CatalogProduct } from "#shared/types/catalog";
 
 export const useFavoriteStore = defineStore("favorites", {
   state: () => ({
     items: [] as CatalogProduct[],
+    isLoading: false,
+    isLoaded: false,
   }),
 
   getters: {
@@ -22,30 +24,69 @@ export const useFavoriteStore = defineStore("favorites", {
   },
 
   actions: {
-    addItem(product: CatalogProduct) {
+    async fetchItems() {
+      if (this.isLoading) {
+        return;
+      }
+
+      this.isLoading = true;
+
+      try {
+        const requestFetch = useRequestFetch();
+        this.items = await requestFetch<CatalogProduct[]>("/api/favorites");
+
+        this.isLoaded = true;
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    async addItem(product: CatalogProduct) {
       if (this.isFavorite(product.id)) return;
+
+      await $fetch(`/api/favorites/${product.id}`, {
+        method: "POST",
+      });
 
       this.items.push(product);
     },
 
-    removeItem(productId: number) {
+    async removeItem(productId: number) {
+      await $fetch(`/api/favorites/${productId}`, {
+        method: "DELETE",
+      });
+
       this.items = this.items.filter((product) => {
         return product.id !== productId;
       });
     },
 
-    toggleItem(product: CatalogProduct) {
+    async toggleItem(product: CatalogProduct) {
       if (this.isFavorite(product.id)) {
-        this.removeItem(product.id);
+        await this.removeItem(product.id);
         return;
       }
 
-      this.addItem(product);
+      await this.addItem(product);
     },
 
-    clearFavorites() {
+    async clearFavorites() {
+      await $fetch("/api/favorites", {
+        method: "DELETE",
+      });
+
       this.items = [];
     },
+
+    reset() {
+      this.items = [];
+      this.isLoaded = false;
+    },
+
+    setItems(items: CatalogProduct[]) {
+      this.items = items;
+      this.isLoaded = true;
+    },
   },
-  persist: true,
+  // persist: true,
 });

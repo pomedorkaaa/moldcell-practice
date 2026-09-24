@@ -45,10 +45,10 @@
       line-height: normal;
       color: black;
 
-      // :global(svg) {
-      //   width: 15px;
-      //   height: 15px;
-      // }
+      & > svg {
+        width: 15px;
+        height: 15px;
+      }
     }
   }
 

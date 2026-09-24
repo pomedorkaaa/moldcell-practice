@@ -36,7 +36,7 @@ const profileLinks = ["Profile", "Orders", "Favorites", "Addresses"];
           </div>
           <div>
             <p :class="styles['identity-name']">{{ user.firstName }}</p>
-            <p :class="styles['identity-email']">{{ user.lastName }}</p>
+            <p :class="styles['identity-email']">{{ user.email }}</p>
           </div>
         </div>
         <nav :class="styles.nav" aria-label="Profile navigation">
@@ -73,7 +73,13 @@ const profileLinks = ["Profile", "Orders", "Favorites", "Addresses"];
         </div> -->
       </article>
 
-      <button type="button" @click="handleLogOut">Log out</button>
+      <button
+        :class="[styles['nav-link'], styles['logout-button']]"
+        type="button"
+        @click="handleLogOut"
+      >
+        Log out
+      </button>
     </div>
   </section>
 </template>

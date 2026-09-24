@@ -2,7 +2,7 @@
 import CatalogGrid from "~/components/catalog/CatalogGrid/CatalogGrid.vue";
 import styles from "../catalog/CatalogPage.module.scss";
 // import { mockCatalogProducts } from "~/utils/mock-products";
-import { useFavoriteStore } from "#imports";
+import { useFavoriteStore } from "../../stores/favorites";
 
 // const favoriteProducts = mockCatalogProducts;
 const favoriteStore = useFavoriteStore();
