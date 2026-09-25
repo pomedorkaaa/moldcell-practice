@@ -1,81 +1,200 @@
 <script setup lang="ts">
+import type { OrderConfirmation } from "#shared/types/order";
+import { useCartStore } from "@/stores/cart";
+
 import styles from "./CheckoutPage.module.scss";
-import { mockProduct } from "~/utils/mock-products";
 
-const customer = reactive({
-  firstName: "Alex",
-  lastName: "Morgan",
-  email: "alex.morgan@example.com",
-  address: "42 Workspace Avenue",
-  city: "Chisinau",
-  country: "Moldova",
+const cartStore = useCartStore();
+
+const lastOrder = useState<OrderConfirmation | null>(
+  "last-order-confirmation",
+  () => null,
+);
+
+const { user } = useUserSession();
+
+const firstName = ref(user.value?.firstName ?? "");
+const lastName = ref(user.value?.lastName ?? "");
+const email = ref(user.value?.email ?? "");
+
+const phone = ref("");
+const city = ref("");
+const address = ref("");
+
+const isLoading = ref(false);
+const errorMessage = ref("");
+
+async function placeOrder() {
+  if (cartStore.items.length === 0) {
+    return;
+  }
+
+  isLoading.value = true;
+  errorMessage.value = "";
+
+  try {
+    const order = await $fetch<OrderConfirmation>("/api/orders", {
+      method: "POST",
+
+      body: {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        phone: phone.value,
+        city: city.value,
+        address: address.value,
+      },
+    });
+
+    lastOrder.value = order;
+
+    cartStore.reset();
+
+    await navigateTo("/checkout/success");
+  } catch (error) {
+    console.error(error);
+
+    errorMessage.value = "Could not place order";
+  } finally {
+    isLoading.value = false;
+  }
+}
+
+useSeoMeta({
+  title: "Checkout | Flux",
 });
-
-const total = mockProduct.price;
 </script>
 
 <template>
-  <section :class="styles['checkout-page']">
-    <div :class="styles.intro">
-      <h1>Checkout</h1>
-      <p>Almost there. Add your details and we will prepare the order.</p>
-    </div>
+  <main :class="styles['checkout']">
+    <h1 :class="styles['checkout-title']">Checkout</h1>
 
-    <div :class="styles.layout">
-      <section :class="styles.card">
-        <h2 :class="styles['card-title']">Shipping details</h2>
-        <form :class="styles.form" @submit.prevent>
-          <div :class="styles['form-row']">
-            <div :class="styles['form-field']">
-              <label for="first-name">First name</label>
-              <input id="first-name" v-model="customer.firstName" type="text" />
-            </div>
-            <div :class="styles['form-field']">
-              <label for="last-name">Last name</label>
-              <input id="last-name" v-model="customer.lastName" type="text" />
-            </div>
-          </div>
-          <div :class="styles['form-field']">
-            <label for="email">Email address</label>
-            <input id="email" v-model="customer.email" type="email" />
-          </div>
-          <div :class="styles['form-field']">
-            <label for="address">Address</label>
-            <input id="address" v-model="customer.address" type="text" />
-          </div>
-          <div :class="styles['form-row']">
-            <div :class="styles['form-field']">
-              <label for="city">City</label>
-              <input id="city" v-model="customer.city" type="text" />
-            </div>
-            <div :class="styles['form-field']">
-              <label for="country">Country</label>
-              <select id="country" v-model="customer.country">
-                <option>Moldova</option>
-                <option>Romania</option>
-                <option>Ukraine</option>
-              </select>
-            </div>
-          </div>
-          <button type="submit" :class="styles['form-button']">Place mock order</button>
-        </form>
-      </section>
+    <div v-if="cartStore.items.length" :class="styles['checkout-layout']">
+      <form
+        id="checkout-form"
+        :class="styles['checkout-form']"
+        @submit.prevent="placeOrder"
+      >
+        <section :class="styles['checkout-card']">
+          <h2 :class="styles['checkout-card-title']">Contact information</h2>
 
-      <aside :class="styles.card">
-        <h2 :class="styles['card-title']">Order summary</h2>
-        <div :class="styles['summary-product']">
-          <img :src="mockProduct.images[0]" :alt="mockProduct.name" :class="styles['summary-product-image']" />
-          <div>
-            <div :class="styles['summary-product-name']">{{ mockProduct.name }}</div>
-            <p :class="styles['summary-product-meta']">Quantity: 1</p>
+          <div :class="styles['checkout-row']">
+            <label :class="styles['checkout-field']">
+              <span>First name</span>
+
+              <input
+                v-model="firstName"
+                type="text"
+                autocomplete="given-name"
+                required
+              />
+            </label>
+
+            <label :class="styles['checkout-field']">
+              <span>Last name</span>
+
+              <input
+                v-model="lastName"
+                type="text"
+                autocomplete="family-name"
+                required
+              />
+            </label>
           </div>
-          <strong :class="styles['summary-product-price']">${{ mockProduct.price }}</strong>
+
+          <label :class="styles['checkout-field']">
+            <span>Email</span>
+
+            <input v-model="email" type="email" autocomplete="email" required />
+          </label>
+
+          <label :class="styles['checkout-field']">
+            <span>Phone</span>
+
+            <input v-model="phone" type="tel" autocomplete="tel" required />
+          </label>
+        </section>
+
+        <section :class="styles['checkout-card']">
+          <h2 :class="styles['checkout-card-title']">Delivery</h2>
+
+          <label :class="styles['checkout-field']">
+            <span>City</span>
+
+            <input
+              v-model="city"
+              type="text"
+              autocomplete="address-level2"
+              required
+            />
+          </label>
+
+          <label :class="styles['checkout-field']">
+            <span>Address</span>
+
+            <input
+              v-model="address"
+              type="text"
+              autocomplete="street-address"
+              required
+            />
+          </label>
+        </section>
+      </form>
+
+      <aside :class="styles['checkout-summary']">
+        <h2 :class="styles['checkout-summary-title']">Order summary</h2>
+
+        <div :class="styles['checkout-products']">
+          <div
+            v-for="item in cartStore.items"
+            :key="item.product.id"
+            :class="styles['checkout-product']"
+          >
+            <img :src="item.product.images[0]" :alt="item.product.name" />
+
+            <div :class="styles['checkout-product-info']">
+              <strong>
+                {{ item.product.name }}
+              </strong>
+
+              <span> Quantity: {{ item.quantity }} </span>
+            </div>
+
+            <strong> ${{ item.product.price * item.quantity }} </strong>
+          </div>
         </div>
-        <div :class="styles['summary-row']"><span>Subtotal</span><strong>${{ total }}</strong></div>
-        <div :class="styles['summary-row']"><span>Shipping</span><strong>Free</strong></div>
-        <div :class="[styles['summary-row'], styles['summary-row--total']]"><span>Total</span><strong>${{ total }}</strong></div>
-        <p :class="styles['secure-note']">This is a mock checkout screen. Payment integration can be added later.</p>
+
+        <div :class="styles['checkout-summary-row']">
+          <span>Items</span>
+          <span>{{ cartStore.totalItems }}</span>
+        </div>
+
+        <div :class="styles['checkout-total']">
+          <span>Total</span>
+
+          <strong> ${{ cartStore.totalPrice }} </strong>
+        </div>
+
+        <p v-if="errorMessage" :class="styles['checkout-error']">
+          {{ errorMessage }}
+        </p>
+
+        <button
+          type="submit"
+          form="checkout-form"
+          :disabled="isLoading"
+          :class="styles['checkout-button']"
+        >
+          {{ isLoading ? "Placing order..." : "Place order" }}
+        </button>
       </aside>
     </div>
-  </section>
+
+    <div v-else :class="styles['checkout-empty']">
+      <h2>Your cart is empty</h2>
+
+      <NuxtLink to="/catalog"> Browse catalog </NuxtLink>
+    </div>
+  </main>
 </template>

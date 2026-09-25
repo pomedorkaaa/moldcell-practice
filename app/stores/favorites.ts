@@ -32,8 +32,8 @@ export const useFavoriteStore = defineStore("favorites", {
       this.isLoading = true;
 
       try {
-        const requestFetch = useRequestFetch();
-        this.items = await requestFetch<CatalogProduct[]>("/api/favorites");
+        // const requestFetch = useRequestFetch();
+        this.items = await $fetch<CatalogProduct[]>("/api/favorites");
 
         this.isLoaded = true;
       } finally {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { L } from "vue-router/dist/index-D7ja2BKs.js";
 import styles from "./ProfilePage.module.scss";
 definePageMeta({
   middleware: "auth",
@@ -11,6 +12,10 @@ async function handleLogOut() {
 
   await navigateTo("/login");
 }
+
+const { data: orders }= await useFetch<OrderSummary[]>("api/orders", {
+  default: () => [],
+})
 
 const profileLinks = ["Profile", "Orders", "Favorites", "Addresses"];
 // const profileDetails = [
@@ -71,6 +76,11 @@ const profileLinks = ["Profile", "Orders", "Favorites", "Addresses"];
             <span :class="styles['details-value']">{{ detail.value }}</span>
           </div>
         </div> -->
+        <ul>
+          <NuxtLink v-for="order in orders" :to="`/orders/${order.id}`">
+            order #{{ order.id }}
+          </NuxtLink>
+        </ul>
       </article>
 
       <button

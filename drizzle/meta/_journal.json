@@ -36,6 +36,13 @@
       "when": 1790292000000,
       "tag": "0004_rename_cart_stock",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790326595107,
+      "tag": "0005_uneven_eternals",
+      "breakpoints": true
     }
   ]
 }

@@ -39,8 +39,8 @@ export const useCartStore = defineStore("cart", {
       this.isLoading = true;
 
       try {
-        const requestFetch = useRequestFetch();
-        this.items = await requestFetch<CartItem[]>("/api/cart");
+        // const requestFetch = useRequestFetch();
+        this.items = await $fetch<CartItem[]>("/api/cart");
         this.isLoaded = true;
       } finally {
         this.isLoading = false;
@@ -156,6 +156,11 @@ export const useCartStore = defineStore("cart", {
       this.items = [];
       this.isLoaded = false;
     },
+
+    setItems(items: CartItem[]) {
+      this.items = items;
+      this.isLoaded = true;
+    }
   },
   // persist: true,
 });

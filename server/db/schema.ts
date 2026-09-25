@@ -117,3 +117,47 @@ export const cart = pgTable(
     ),
   ],
 );
+
+export const orders = pgTable(
+  "orders",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id").references(() => users.id),
+    guestId: text("guest_id"),
+    firstName: text("first_name").notNull(),
+    lastName: text("last_name").notNull(),
+    email: text("email").notNull(),
+    phone: text("phone").notNull(),
+    city: text("city").notNull(),
+    address: text("address").notNull(),
+    status: text("status").notNull().default("placed"),
+    total: integer("total").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [
+    check(
+      "orders_owner_check",
+      sql`num_nonnulls(${table.userId}, ${table.guestId}) = 1`,
+    ),
+  ],
+);
+
+export const orderItems = pgTable(
+  "order_items",
+  {
+    id: serial("id").primaryKey(),
+    orderId: integer("order_id")
+      .notNull()
+      .references(() => orders.id, {
+        onDelete: "cascade",
+      }),
+    productId: integer("product_id").references(() => products.id, {
+      onDelete: "set null",
+    }),
+    productName: text("product_name").notNull(),
+    unitPrice: integer("unit_price").notNull(),
+    quantity: integer("quantity").notNull(),
+  },
+  (table) => [check("order_items_quantity_check", sql`${table.quantity} > 0`)],
+);
+
